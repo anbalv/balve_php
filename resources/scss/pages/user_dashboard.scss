@@ -1,0 +1,1300 @@
+@import "../base/variables";
+@import "../base/mixins";
+@import "../base/typography";
+@import "../base/fonts";
+
+// Mixins
+@include colorCycle;
+@include gradientMove;
+
+/* ------------------------------------
+   SVG Styling
+------------------------------------ */
+#greeting-svg,
+#quote-svg {
+  margin: 0;
+  padding: 0;
+}
+
+.svg-greeting-text text {
+  font-weight: 700;
+  font-family: "Dancing Script", sans-serif;
+  fill: url(#greeting-gradient);
+}
+
+.svg-quote-text text {
+  font-weight: 700;
+  font-family: "Dancing Script", sans-serif;
+  font-style: italic;
+  fill: url(#quote-gradient);
+}
+
+/* ------------------------------------
+   Container Styling
+------------------------------------ */
+
+.middle-flex-container {
+  width: 500px;
+}
+
+.container-header {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: $primary-color;
+  text-align: center;
+  width: 100%;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+}
+
+.thermometer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%; // Volle Breite
+  position: relative;
+}
+
+.thermometer {
+  width: 20px;
+  height: 400px; // Höhe des Thermometers
+  background-color: #e0e0e0;
+  border: 2px solid #000;
+  box-shadow: $box-shadow-soft-medium;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2; // Über der Skala
+}
+
+.mercury {
+  background: linear-gradient(to top, #505960 0%, #a5c0cd 50%, #505960 100%);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 4px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 0 8px rgba(173, 216, 230, 0.3);
+  animation: mercuryRise 5s forwards;
+  z-index: 3; // Über dem Thermometer
+}
+
+.scale {
+  left: -109px;
+  top: -44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 77px;
+  position: relative;
+
+  span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #343a40;
+    text-shadow: 1px 1px 2px #f0f0f0;
+    position: relative;
+    transform: translateY(0);
+    white-space: nowrap;
+    top: 41px;
+    left: 130px;
+    margin-bottom: 0;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 2px;
+      background-color: #343a40;
+      position: absolute;
+      right: 49px;
+      top: 62%;
+      transform: translateY(-50%);
+      box-shadow: 1px 1px 4px #222222;
+    }
+  }
+}
+
+.points-display {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  color: $primary-color;
+  margin-top: 40px;
+}
+
+/* ------------------------------------
+   Utility Classes
+------------------------------------ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ------------------------------------
+   Box Shadows
+------------------------------------ */
+.shadow-initial,
+.task-container.shadow-initial {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-orange,
+.task-container.shadow-orange {
+  box-shadow: 0 4px 8px rgba(255, 165, 0, 0.6);
+}
+
+.shadow-blink,
+.task-container.shadow-blink {
+  box-shadow: 0 4px 8px rgba(0, 0, 255, 0.6);
+  animation: blink 1s infinite;
+}
+
+.shadow-green,
+.task-container.shadow-green {
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.6);
+}
+
+.shadow-red,
+.task-container.shadow-red {
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0);
+  }
+}
+
+/* ------------------------------------
+   Task Container Styling
+------------------------------------ */
+.new-container {
+  background-color: $white-color;
+  border-radius: $radius-xs;
+  border: 1px solid $neutral-gray;
+  box-sizing: border-box;
+  box-shadow: $box-shadow-hover-medium;
+  transition: box-shadow $transition-normal ease-in-out;
+  max-height: 600px;
+  margin-right: $margin-sm;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: $spacing-md $spacing-lg;
+  position: relative;
+  width: 100%; // Volle Breite
+}
+
+.task-container {
+  display: block;
+  flex-direction: column;
+  background-color: rgba(217, 217, 217, 0.2);
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  padding: 20px 40px;
+  margin-bottom: $spacing-sm;
+  overflow: visible;
+  width: 100%; // Volle Breite
+}
+
+.task-container:hover {
+  box-shadow: 0 7px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------
+   Loading and Error States
+------------------------------------ */
+.loading-overlay-private,
+.no-tasks-message-private,
+.loading-overlay,
+.no-tasks-message,
+.no-private-tasks-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ------------------------------------
+   Layout and Styling
+------------------------------------ */
+.transparent-task-inner-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%; // Volle Breite des übergeordneten Containers
+}
+
+/* ------------------------------------
+   Calendar Styling
+------------------------------------ */
+.calendar-container {
+  width: 100%; // Nutzt die volle Breite des übergeordneten Containers
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.week-calendar {
+  width: 100%; // Nutzt die volle Breite des übergeordneten Containers
+  max-width: 100%; // Sicherstellt, dass die Breite nicht überschritten wird
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+.calendar-days {
+  display: flex;
+  justify-content: space-around;
+  width: 100%; // Nutzt die volle Breite des übergeordneten Containers
+}
+
+.day-tile {
+  flex: 1;
+  min-width: 140px;
+  height: 80px;
+  margin: 40px;
+  text-align: center;
+  background-color: $white-color;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  padding: 1px;
+  border: 2px solid $accent-color;
+  box-shadow: 0 8px 16px $accent-color;
+}
+
+.day-tile .weekday,
+.day-tile .date {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 2px 0;
+}
+
+.day-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px $secondary-color;
+}
+
+.day-tile a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.weekday,
+.date {
+  display: block;
+  margin: 5px 0;
+}
+
+.calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; // Nutzt die volle Breite des übergeordneten Containers
+}
+
+#prevWeek,
+#nextWeek {
+  cursor: pointer;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  padding: 10px;
+  font-size: 20px;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#prevWeek:hover,
+#nextWeek:hover {
+  color: #495057;
+  border-color: #adb5bd;
+}
+
+#prevWeek {
+  visibility: hidden;
+}
+
+.day-tile .weekday {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.day-tile .date {
+  display: block;
+  font-size: 1em;
+  color: #555;
+}
+
+.today-highlight {
+  background-color: yellow; /* Hintergrundfarbe für den heutigen Tag */
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.today-highlight .weekday,
+.today-highlight .date {
+  color: red; /* Textfarbe auf Rot setzen */
+  font-weight: bold; /* Text fett darstellen */
+}
+
+.calendar-navigation button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.calendar-navigation button:hover {
+  background-color: $primary-color;
+}
+
+/* ------------------------------------
+   Flexbox Layouts
+------------------------------------ */
+.outer-flex-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 50px;
+}
+
+.inner-flex-container {
+  display: flex;
+  width: 100%;
+}
+
+.inner-flex-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: calc(50% - 30px);
+  gap: 20px;
+  width: auto;
+}
+
+.task-title-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.labels,
+.values {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.labels {
+  flex: 1;
+}
+
+.values {
+  flex: 2;
+}
+
+.label {
+  align-items: flex-start;
+  font-weight: bold;
+  font-size: $font-size-md;
+}
+
+.value {
+  margin-top: 0;
+  margin-bottom: 0;
+  white-space: normal;
+  font-size: $font-size-md;
+}
+
+.title {
+  flex: 0 0 70%;
+  flex-basis: 70%;
+  justify-content: flex-start;
+  font-weight: bold;
+  font-size: $font-size-lg;
+}
+
+.task-status-img {
+  width: 70px;
+  height: auto;
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  .outer-flex-container,
+  .inner-flex-container,
+  .inner-flex-column,
+  .middle-flex-container {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .inner-flex-container {
+    margin-bottom: 20px;
+  }
+
+  .middle-flex-container {
+    width: 100%;
+  }
+
+  .calendar-container,
+  .week-calendar {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .calendar-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 20px;
+  }
+
+  .day-tile {
+    flex: 1 1 calc(33% - 20px);
+    min-width: 120px;
+    height: 80px;
+    margin: 10px;
+    padding: 5px;
+
+    &.today-highlight {
+      background-color: $secondary-color !important;
+      color: $warning-red;
+
+      .weekday,
+      .date {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .calendar-navigation button {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+
+  .container-header,
+  .points-display {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .scale {
+    left: 244px;
+    top: -11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 74px;
+
+    span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #343a40;
+      text-shadow: 1px 1px 2px #f0f0f0;
+      position: relative;
+      transform: translateY(0);
+      white-space: nowrap;
+      left: -216px;
+      margin-bottom: 0;
+      top: 10px;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: #343a40;
+        position: absolute;
+        right: 51px;
+        top: 51%;
+        transform: translateY(-50%);
+        box-shadow: 1px 1px 4px #222222;
+      }
+    }
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+  .transparent-task-container {
+    padding: 10px;
+  }
+
+  .outer-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .inner-flex-container,
+  .middle-flex-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    box-sizing: border-box;
+    width: auto;
+  }
+
+  .inner-flex-container {
+    flex: 3;
+    flex-basis: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .middle-flex-container {
+    flex: 1;
+    flex-basis: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .middle-flex-column {
+    width: auto;
+  }
+
+  .new-container,
+  .container-header,
+  .task-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .new-container {
+    padding: 25px 15px;
+    margin-right: 0;
+  }
+
+  .container-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .task-container {
+    margin-bottom: 10px;
+    padding: 15px 15px 25px 25px; // Mehr Padding für Touch-Interaktionen
+    cursor: pointer;
+    will-change: transform, box-shadow;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+    touch-action: manipulation;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Etwas stärkere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Etwas abgeschwächter Schatten bei Aktivierung
+    }
+  }
+
+  .value,
+  .label {
+    font-size: $font-size-sm;
+    line-height: 1;
+  }
+
+  .title {
+    font-size: $font-size-md;
+  }
+
+  .thermometer-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 35px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calendar-container,
+  .week-calendar {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-overflow-scrolling: touch; // Verbessert das Scroll-Verhalten
+    scroll-behavior: smooth; // Sanftes Scrollen
+    scroll-snap-type: x mandatory; // Snappt zu definierten Punkten beim Scrollen
+  }
+
+  .calendar-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 12px; // Etwas größerer Abstand für einfachere Berührung
+    padding: 0;
+  }
+
+  .calendar-navigation,
+  .day-tile {
+    touch-action: manipulation; // Verhindert unerwünschte Gesten wie Pinch-to-Zoom
+  }
+
+  #prevWeek,
+  #nextWeek {
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      background-color: #e0e0e0; // Visuelle Rückmeldung bei Berührung
+    }
+  }
+
+  .calendar-days {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    padding: 0;
+    overflow: hidden;
+    flex-grow: 1;
+    gap: 12px; // Etwas größerer Abstand für einfachere Berührung
+    touch-action: pan-y; // Erlaubt vertikales Scrollen, verhindert horizontales
+    scroll-snap-align: start; // Setzt den Scroll-Snap-Align-Punkt
+  }
+
+  .day-tile {
+    flex: 1;
+    min-width: 110px; // Leicht vergrößerte Mindestbreite für einfachere Berührung
+    height: 85px; // Leicht vergrößerte Höhe für einfachere Berührung
+    margin: 6px;
+    padding: 12px;
+    background-color: $white-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+    border: 2px solid $accent-color;
+    box-shadow: 0 8px 16px $accent-color;
+    cursor: pointer;
+    will-change: transform, box-shadow;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.05); // Größere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+    }
+
+    &.today-highlight {
+      background-color: $secondary-color !important;
+      color: $warning-red !important;
+
+      .weekday,
+      .date {
+        font-size: 16px !important;
+        font-weight: bold !important;
+      }
+    }
+  }
+
+  .calendar-navigation button {
+    max-width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 18px; // Größere Touch-Ziele durch mehr Padding
+    font-size: 16px;
+    cursor: pointer;
+    will-change: transform, box-shadow;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Größere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Etwas abgeschwächter Schatten bei Aktivierung
+    }
+  }
+
+  .points-display {
+    margin-top: 10px;
+    font-size: $font-size-md;
+  }
+
+  .scale {
+    left: 244px;
+    top: -9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 77px;
+
+    span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #343a40;
+      text-shadow: 1px 1px 2px #f0f0f0;
+      position: relative;
+      transform: translateY(0);
+      white-space: nowrap;
+      left: -216px;
+      margin-bottom: 0;
+      top: 8px;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: #343a40;
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 1px 1px 4px #222222;
+      }
+    }
+  }
+
+  /* Anpassung für SVG-Elemente */
+  #greeting-svg {
+    height: 90px; /* Setzt eine Mindesthöhe für den SVG-Container */
+  }
+
+  #quote-svg {
+    margin: auto; /* Passt die Höhe an den Inhalt an */
+    margin-bottom: 20px;
+  }
+
+  .svg-full-width {
+    width: 100%;
+    height: 89px;
+    margin: auto; /* Passt die Höhe an den Inhalt an */
+    max-height: auto;
+    max-width: 100%;
+    display: block;
+    transition:
+      transform 0.2s ease-in-out,
+      opacity 0.2s ease-in-out;
+    will-change: transform, opacity;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Größere Vergrößerung bei Berührung
+      opacity: 0.9; // Leichte Transparenz bei Berührung
+    }
+  }
+
+  * {
+    touch-action: manipulation; // Verhindert unerwünschte Touch-Gesten
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // Entfernt Tap-Highlight-Farbe
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .outer-flex-container,
+  .inner-flex-container,
+  .inner-flex-column,
+  .middle-flex-container {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .inner-flex-container {
+    margin-bottom: 20px;
+  }
+
+  .middle-flex-container {
+    width: 100%;
+  }
+
+  .calendar-container,
+  .week-calendar {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .calendar-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 20px;
+  }
+
+  .day-tile {
+    flex: 1 1 calc(33% - 20px);
+    min-width: 120px;
+    height: 80px;
+    margin: 10px;
+    padding: 8px; // Größere Zielbereiche für Touch
+    border-radius: 8px; // Erhöht die Rundung für bessere Ästhetik auf kleineren Bildschirmen
+
+    &.today-highlight {
+      background-color: $secondary-color !important;
+      color: $warning-red;
+
+      .weekday,
+      .date {
+        font-size: 18px; // Erhöht die Schriftgröße für bessere Lesbarkeit
+        font-weight: bold;
+      }
+    }
+  }
+
+  .calendar-navigation button {
+    padding: 10px 12px; // Größere Touch-Ziele
+    font-size: 18px; // Erhöhte Schriftgröße für bessere Lesbarkeit
+    margin: 5px; // Abstand zwischen den Buttons für einfachere Interaktion
+  }
+
+  .container-header,
+  .points-display {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px; // Anpassung der Schriftgröße für bessere Lesbarkeit
+  }
+
+  .scale {
+    left: 244px;
+    top: -9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 77px;
+
+    span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #343a40;
+      text-shadow: 1px 1px 2px #f0f0f0;
+      position: relative;
+      transform: translateY(0);
+      white-space: nowrap;
+      left: -213px;
+      margin-bottom: 0;
+      top: 8px;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: $dark-color;
+        position: absolute;
+        right: 55px; // Verschiebt die Linien weiter nach rechts
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 1px 1px 4px $soft-black;
+      }
+    }
+  }
+
+  /* Anpassung für SVG-Elemente */
+  #greeting-svg {
+    height: 100px; /* Setzt eine Mindesthöhe für den SVG-Container */
+  }
+
+  #quote-svg {
+    margin: auto; /* Passt die Höhe an den Inhalt an */
+  }
+
+  .svg-full-width svg-text-bold {
+    width: 100%; // Nutzt die volle Breite des Containers
+    height: auto; // Passt die Höhe entsprechend dem Inhalt an
+    max-width: 100%; // Stellt sicher, dass die SVGs nicht breiter als der Container werden
+    display: block; // Stellt sicher, dass die SVGs als Blockelemente angezeigt werden
+    margin: 10px; // Zentriert die SVGs innerhalb des Containers, falls nötig
+  }
+
+  .new-container {
+    padding: 30px 20px; // Erhöhtes Padding für komfortable Touch-Interaktion
+    margin-right: 0;
+  }
+
+  .task-container {
+    padding: 15px 15px 25px 25px; // Mehr Padding für Touch-Interaktionen
+  }
+
+  .value,
+  .label {
+    font-size: $font-size-xs; // Erhöht die Schriftgröße leicht für bessere Lesbarkeit
+  }
+
+  .title {
+    font-size: $font-size-sm; // Anpassung der Schriftgröße für bessere Lesbarkeit
+  }
+
+  /* Performance-Optimierung */
+  .day-tile,
+  .task-container {
+    will-change: transform, box-shadow; // Verbesserung der Performance bei Interaktionen
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .transparent-task-container {
+    padding: 10px;
+  }
+
+  .outer-flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .inner-flex-container,
+  .middle-flex-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    box-sizing: border-box;
+    width: auto;
+  }
+
+  .inner-flex-container {
+    flex: 3;
+    flex-basis: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .middle-flex-container {
+    flex: 1;
+    flex-basis: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .middle-flex-column {
+    width: auto;
+  }
+
+  .new-container,
+  .container-header,
+  .task-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .new-container {
+    padding: 25px 15px;
+    margin-right: 0;
+  }
+
+  .container-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .task-container {
+    margin-bottom: 10px;
+    padding: 15px 15px 25px 25px; // Mehr Padding für Touch-Interaktionen
+    cursor: pointer;
+    will-change: transform, box-shadow;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+    touch-action: manipulation;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Etwas stärkere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Etwas abgeschwächter Schatten bei Aktivierung
+    }
+  }
+
+  .value,
+  .label {
+    font-size: $font-size-sm;
+    line-height: 1;
+  }
+
+  .title {
+    font-size: $font-size-md;
+  }
+
+  .thermometer-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 35px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calendar-container,
+  .week-calendar {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-overflow-scrolling: touch; // Verbessert das Scroll-Verhalten
+    scroll-behavior: smooth; // Sanftes Scrollen
+    scroll-snap-type: x mandatory; // Snappt zu definierten Punkten beim Scrollen
+  }
+
+  .calendar-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 12px; // Etwas größerer Abstand für einfachere Berührung
+    padding: 0;
+  }
+
+  .calendar-navigation,
+  .day-tile {
+    touch-action: manipulation; // Verhindert unerwünschte Gesten wie Pinch-to-Zoom
+  }
+
+  #prevWeek,
+  #nextWeek {
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      background-color: #e0e0e0; // Visuelle Rückmeldung bei Berührung
+    }
+  }
+
+  .calendar-days {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    flex-wrap: nowrap;
+    padding: 0;
+    overflow: hidden;
+    flex-grow: 1;
+    gap: 12px; // Etwas größerer Abstand für einfachere Berührung
+    touch-action: pan-y; // Erlaubt vertikales Scrollen, verhindert horizontales
+    scroll-snap-align: start; // Setzt den Scroll-Snap-Align-Punkt
+  }
+
+  .day-tile {
+    flex: 1;
+    min-width: 100px; // Leicht vergrößerte Mindestbreite für einfachere Berührung
+    height: 7%; // Leicht vergrößerte Höhe für einfachere Berührung
+    margin: 4px;
+    padding: 8px;
+    background-color: $white-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+    border: 2px solid $accent-color;
+    box-shadow: 0 8px 16px $accent-color;
+    cursor: pointer;
+    will-change: transform, box-shadow;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.05); // Größere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+    }
+
+    &.today-highlight {
+      background-color: $secondary-color !important;
+      color: $warning-red !important;
+
+      .weekday,
+      .date {
+        font-size: 16px !important;
+        font-weight: bold !important;
+      }
+    }
+  }
+
+  .calendar-navigation button {
+    max-width: 45%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 18px; // Größere Touch-Ziele durch mehr Padding
+    font-size: 16px;
+    cursor: pointer;
+    will-change: transform, box-shadow;
+    transition:
+      transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Größere Vergrößerung bei Berührung
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); // Deutlicherer Schatten
+    }
+
+    &:active {
+      transform: scale(0.96); // Leichte Verkleinerung bei Aktivierung
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Etwas abgeschwächter Schatten bei Aktivierung
+    }
+  }
+
+  .points-display {
+    margin-top: 10px;
+    font-size: $font-size-md;
+  }
+
+  .scale {
+    left: 244px;
+    top: -9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 77px;
+
+    span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #343a40;
+      text-shadow: 1px 1px 2px #f0f0f0;
+      position: relative;
+      transform: translateY(0);
+      white-space: nowrap;
+      left: -222px;
+      margin-bottom: 0;
+      top: 9px;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: #343a40;
+        position: absolute;
+        right: 51px;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 1px 1px 4px #222222;
+      }
+    }
+  }
+
+  /* Anpassung für SVG-Elemente */
+  #greeting-svg {
+    height: 90px; /* Setzt eine Mindesthöhe für den SVG-Container */
+  }
+
+  #quote-svg {
+    margin: auto; /* Passt die Höhe an den Inhalt an */
+    margin-bottom: 20px;
+  }
+
+  .svg-full-width {
+    width: 100%;
+    height: 89px;
+    margin: auto; /* Passt die Höhe an den Inhalt an */
+    max-height: auto;
+    max-width: 100%;
+    display: block;
+    transition:
+      transform 0.2s ease-in-out,
+      opacity 0.2s ease-in-out;
+    will-change: transform, opacity;
+
+    &:hover,
+    &:focus-visible {
+      transform: scale(1.04); // Größere Vergrößerung bei Berührung
+      opacity: 0.9; // Leichte Transparenz bei Berührung
+    }
+  }
+
+  * {
+    touch-action: manipulation; // Verhindert unerwünschte Touch-Gesten
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // Entfernt Tap-Highlight-Farbe
+  }
+}

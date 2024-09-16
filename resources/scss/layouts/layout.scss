@@ -1,0 +1,1100 @@
+// resources\scss\layouts\layout.scss
+@import "../base/variables"; // Import variables if not globally managed
+@import "../base/mixins"; // Import mixins
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden; // Verhindert jegliches Scrollen außerhalb des main-container
+    box-sizing: border-box; // Stellt sicher, dass alle Elemente diese Box-Eigenschaft erben
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body::before {
+    z-index: -2;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url("/images/background.jpg") no-repeat center center;
+    background-size: auto 100%;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.main-container {
+    background-color: $background-color;
+    border-radius: $radius-md;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    margin: $header-height auto $vertical-margin auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; // Verhindert die vertikale Zentrierung des Inhalts
+    align-items: stretch; // Stellt sicher, dass der Inhalt die gesamte Breite nutzt
+    width: calc(100% - 2 * $horizontal-margin);
+    max-width: 100%;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    box-sizing: border-box;
+    background-image: linear-gradient(
+        45deg,
+        $primary-color 0%,
+        $primary-color 20%,
+        $secondary-color 45%,
+        $accent-color 70%
+    );
+    @include box-shadow(0 2px 5px $dark-color);
+    z-index: 1500;
+    padding: 1vh;
+    max-height: 100vh;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        background-image: linear-gradient(
+            45deg,
+            $primary-color 0%,
+            $primary-color 20%,
+            $secondary-color 45%,
+            $accent-color 70%
+        );
+        filter: blur(8px);
+        z-index: -1;
+    }
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 100px; // Definiert einen Abstand zwischen den Elementen
+    margin-right: 50px; // Schiebt header-right an den rechten Rand
+    margin-left: 50px;
+}
+
+.progress-container {
+    display: flex;
+    width: 350px;
+    background-color: #eee;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+    width: 0%; // Startwert des Fortschritts
+    height: 20px;
+    background: $gradient-custom; // Anwendung des Quecksilber-Gradients
+    border-radius: 5px;
+    text-align: center;
+    line-height: 2px;
+    color: white;
+}
+
+.clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: $accent-color-desaturated; // Use a desaturated accent color for a subtle background
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-focused-medium; // Moderate shadow for depth
+
+    .clock {
+        font-family: $font-family-headline; // Stylish cursive for the clock
+        font-size: $font-size-lg; // Large font size for visibility
+        color: $dark-color; // Dark color for contrast
+        padding: 4px 16px;
+        border: 2px solid $primary-color; // Solid border using the primary color
+        background-color: $background-color-less-transparent; // Less transparent background for readability
+        border-radius: $radius-sm;
+        box-shadow: $box-shadow-hover-medium; // Hover effect shadow for interactivity
+        position: relative;
+
+        &:hover {
+            transform: scale($hover-scale-small); // Slight scale up on hover
+            background-color: $accent-color-light; // Lighter accent color on hover
+            cursor: pointer; // Indicates the element is interactive
+
+            & {
+                transition: transform $transition-fast,
+                    background-color $transition-normal;
+            }
+        }
+
+        &::after {
+            content: " Uhr";
+        }
+    }
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: $spacing-sm; // Reduzierte Polsterung
+    background-color: $background-color-light;
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-focused-medium;
+
+    a,
+    .dropdown-toggle {
+        font-family: $font-family-default;
+        font-size: $font-size-sm; // Kleinere Schriftgröße für mobile Geräte
+        color: $primary-color;
+        text-decoration: none;
+        padding: $spacing-xs $spacing-sm;
+        border: 2px solid transparent;
+        border-radius: $radius-sm;
+        transition: all $transition-normal;
+
+        &:hover {
+            background-color: $primary-color-light;
+            color: $white-color;
+            border-color: $primary-color;
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+    }
+
+    .dropdown {
+        position: relative;
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: $accent-color-desaturated;
+            border-radius: $radius-xs;
+            box-shadow: $box-shadow-focused-strong;
+            z-index: 1500;
+            min-width: 220px; // Reduzierte Mindestbreite
+
+            a {
+                font-size: $font-size-sm; // Kleinere Schriftgröße für Dropdown
+                padding: $spacing-xs $spacing-sm;
+                display: block;
+
+                &:hover {
+                    color: $secondary-color;
+                    background-color: $primary-color-desaturated;
+                }
+            }
+        }
+
+        &:hover .dropdown-menu {
+            display: block; // Show dropdown menu on hover
+        }
+    }
+}
+
+.logo-container {
+    margin-right: 20px; // Reduzierter Rand
+}
+
+.logo {
+    font: {
+        size: 4rem; // Reduzierte Schriftgröße
+        family: "Dancing Script", cursive;
+        weight: bold;
+        style: italic;
+    }
+    color: $secondary-color;
+    text-decoration: none;
+    padding-left: 20px;
+    transition: transform $transition-fast, text-shadow $transition-fast;
+
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+        1px 1px 0 #000; // Schwarzer Rand um die Schrift
+
+    &:hover {
+        color: #ffd700;
+        transform: scale(1.2); // Weniger starkes Skalieren
+        text-shadow: 10px 9px 4px $neutral-gray;
+    }
+}
+
+.hamburger-menu,
+.sidebar-menu {
+    display: flex; /* Blendet das Hamburger-Menü und die Sidebar im Hochformat ein */
+}
+
+.hamburger-menu {
+    display: flex; /* Aktiviert das Hamburger-Menü */
+    flex-direction: column; /* Stellt sicher, dass die Striche vertikal gestapelt werden */
+    justify-content: space-between; /* Platzierung der Striche mit gleichem Abstand */
+    align-items: center; /* Zentriert das Hamburger-Menü vertikal */
+    position: absolute;
+    right: 40px; /* Positioniert das Hamburger-Menü 40px vom rechten Rand */
+    top: 60px; /* Positioniert das Hamburger-Menü 60px vom oberen Rand des Headers */
+    z-index: 2000; /* Stellt sicher, dass das Hamburger-Menü über anderen Elementen liegt */
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.8
+    ); /* Setzt einen halbtransparenten Hintergrund, um es besser sichtbar zu machen */
+    padding: 10px; /* Fügt etwas Polsterung hinzu, um den Klickbereich zu vergrößern */
+    border-radius: 5px; /* Fügt abgerundete Ecken hinzu */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Fügt einen leichten Schatten hinzu, um es hervorzuheben */
+}
+
+.hamburger-menu span {
+    background-color: #333; /* Setzt die Farbe der Linien auf ein dunkles Grau */
+    height: 3px; /* Erhöht die Dicke der Linien für bessere Sichtbarkeit */
+    width: 25px; /* Setzt die Breite der Linien */
+    margin: 2px 0; /* Fügt minimalen Abstand zwischen den Linien hinzu */
+    border-radius: 2px; /* Fügt abgerundete Ecken zu den Linien hinzu */
+}
+
+/* Sidebar Anpassungen */
+.sidebar-menu {
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.603
+    ); /* Weniger transparenter Hintergrund für bessere Lesbarkeit */
+    color: $primary-color; /* Schriftfarbe */
+    width: 250px; /* Breite der Sidebar */
+    position: fixed; /* Fixiert die Sidebar an der Seite */
+    top: 0;
+    right: -250px; /* Versteckt die Sidebar standardmäßig außerhalb des Bildschirms */
+    height: 100%;
+    z-index: 3000; /* Stellt sicher, dass die Sidebar über dem Hauptinhalt liegt */
+    transition: right 0.3s ease, background-color 0.3s ease; /* Animiert das Ein- und Ausblenden der Sidebar sowie den Hintergrund */
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu, um die Sidebar vom Inhalt abzuheben */
+    border-radius: 0 10px 10px 0; /* Runde Ecken an der linken Seite */
+    padding-top: 150px; /* Platz für den Headerbereich */
+    pointer-events: none; /* Verhindert, dass die Sidebar Klicks registriert, wenn sie geschlossen ist */
+    display: flex;
+    flex-direction: column; /* Stellt sicher, dass die Inhalte der Sidebar vertikal gestapelt sind */
+    font-size: 1.8rem; // Schriftgröße des Logos im Hochformat
+}
+
+.sidebar-menu.open {
+    right: 0; /* Schiebt die Sidebar ins Sichtfeld */
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.603
+    ); /* Stellt sicher, dass die Sidebar einen weniger transparenten Hintergrund hat */
+    pointer-events: auto; /* Erlaubt Klicks auf die Sidebar, wenn sie geöffnet ist */
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 15px 20px; /* Polsterung für Links innerhalb der Sidebar */
+    color: $primary-color; /* Schriftfarbe */
+    text-decoration: none; /* Entfernt Unterstreichung */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Leichte Abgrenzung zwischen den Links */
+    font-size: 1.6rem; /* Etwas größere Schriftgröße */
+    width: 100%; /* Stellt sicher, dass der Link die gesamte Breite der Sidebar einnimmt */
+}
+
+.sidebar-menu a:hover {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Hintergrundfarbe beim Hover */
+}
+
+/* Sidebar Anpassungen */
+.sidebar-menu .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.95); /* Gleiches Design wie die Sidebar */
+    border-radius: 0 10px 10px 0;
+    box-shadow: none; /* Entfernt den Schatten */
+    display: none; /* Standardmäßig ausgeblendet */
+    flex-direction: column; /* Stellt sicher, dass die Dropdown-Links vertikal gestapelt sind */
+    padding: 0; /* Entfernt überflüssige Polsterung */
+    overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers sichtbar ist */
+    max-height: 0; /* Startwert für das Zusammenklappen */
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Übergangseffekt für das Ausrollen des Menüs */
+}
+
+.sidebar-menu .dropdown-menu.open {
+    display: flex; /* Zeigt das Dropdown-Menü an, wenn es geöffnet ist */
+    max-height: 500px; /* Maximale Höhe für das Ausrollen */
+    padding: 10px 20px; /* Fügt Polsterung hinzu, wenn das Menü geöffnet ist */
+}
+
+.sidebar-menu .dropdown-toggle::after {
+    content: "\25BC"; /* Pfeil nach unten */
+    float: right;
+    margin-left: 5px;
+    color: #fff; /* Stellt sicher, dass der Pfeil auch gut sichtbar ist */
+}
+
+.hamburger-menu,
+.sidebar-menu {
+    display: none; // Blendet das Hamburger-Menü und die Sidebar aus
+}
+
+/* Anpassungen für iPad 8th Generation - Hochformat */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+    .nav-container,
+    .clock-container {
+        display: none; // Entfernt die Navigation und Uhr, um mehr Platz für das Hamburger-Menü zu schaffen
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column; // Macht den Header-Inhalt vertikal
+        align-items: center; // Zentriert die Inhalte horizontal
+        position: relative; // Ermöglicht die Positionierung des Hamburger-Menüs
+        max-width: 100vw;
+        margin: 0;
+        padding: 2vh; // Polsterung für etwas Abstand innerhalb des Headers
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; // Nimmt die gesamte Breite des Headers ein
+    }
+
+    .logo {
+        font-size: 4rem; // Schriftgröße des Logos im Hochformat
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000; // Schwarzer Rand um die Schrift
+        white-space: nowrap; // Verhindert Zeilenumbruch innerhalb des Logos
+        text-align: center; // Zentriert den Text innerhalb des Logo-Containers
+    }
+
+    .header-right {
+        display: flex;
+        justify-content: center;
+        width: 100%; // Nimmt die gesamte Breite unter dem Logo ein
+        flex-direction: column; // Stellt sicher, dass die Elemente untereinander erscheinen
+        align-items: center; // Zentriert die Elemente horizontal
+    }
+
+    // Erhöhte Höhe für den progress-container
+    .progress-container {
+        height: 20px; // Größere Höhe für das Fire 7 im Hochformat
+    }
+
+    .hamburger-menu,
+    .sidebar-menu {
+        display: flex; /* Blendet das Hamburger-Menü und die Sidebar im Hochformat ein */
+    }
+
+    .hamburger-menu {
+        display: flex; /* Aktiviert das Hamburger-Menü */
+        flex-direction: column; /* Stellt sicher, dass die Striche vertikal gestapelt werden */
+        justify-content: space-between; /* Platzierung der Striche mit gleichem Abstand */
+        align-items: center; /* Zentriert das Hamburger-Menü vertikal */
+        position: absolute;
+        right: 40px; /* Positioniert das Hamburger-Menü 40px vom rechten Rand */
+        top: 60px; /* Positioniert das Hamburger-Menü 60px vom oberen Rand des Headers */
+        z-index: 2000; /* Stellt sicher, dass das Hamburger-Menü über anderen Elementen liegt */
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.8
+        ); /* Setzt einen halbtransparenten Hintergrund, um es besser sichtbar zu machen */
+        padding: 10px; /* Fügt etwas Polsterung hinzu, um den Klickbereich zu vergrößern */
+        border-radius: 5px; /* Fügt abgerundete Ecken hinzu */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Fügt einen leichten Schatten hinzu, um es hervorzuheben */
+    }
+
+    .hamburger-menu span {
+        background-color: #333; /* Setzt die Farbe der Linien auf ein dunkles Grau */
+        height: 3px; /* Erhöht die Dicke der Linien für bessere Sichtbarkeit */
+        width: 25px; /* Setzt die Breite der Linien */
+        margin: 2px 0; /* Fügt minimalen Abstand zwischen den Linien hinzu */
+        border-radius: 2px; /* Fügt abgerundete Ecken zu den Linien hinzu */
+    }
+
+    /* Sidebar Anpassungen */
+    .sidebar-menu {
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.603
+        ); /* Weniger transparenter Hintergrund für bessere Lesbarkeit */
+        color: $primary-color; /* Schriftfarbe */
+        width: 250px; /* Breite der Sidebar */
+        position: fixed; /* Fixiert die Sidebar an der Seite */
+        top: 0;
+        right: -250px; /* Versteckt die Sidebar standardmäßig außerhalb des Bildschirms */
+        height: 100%;
+        z-index: 3000; /* Stellt sicher, dass die Sidebar über dem Hauptinhalt liegt */
+        transition: right 0.3s ease, background-color 0.3s ease; /* Animiert das Ein- und Ausblenden der Sidebar sowie den Hintergrund */
+        box-shadow: -2px 0 6px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu, um die Sidebar vom Inhalt abzuheben */
+        border-radius: 0 10px 10px 0; /* Runde Ecken an der linken Seite */
+        padding-top: 150px; /* Platz für den Headerbereich */
+        pointer-events: none; /* Verhindert, dass die Sidebar Klicks registriert, wenn sie geschlossen ist */
+        display: flex;
+        flex-direction: column; /* Stellt sicher, dass die Inhalte der Sidebar vertikal gestapelt sind */
+    }
+
+    .sidebar-menu.open {
+        right: 0; /* Schiebt die Sidebar ins Sichtfeld */
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.603
+        ); /* Stellt sicher, dass die Sidebar einen weniger transparenten Hintergrund hat */
+        pointer-events: auto; /* Erlaubt Klicks auf die Sidebar, wenn sie geöffnet ist */
+    }
+
+    .sidebar-menu a {
+        display: block;
+        padding: 15px 20px; /* Polsterung für Links innerhalb der Sidebar */
+        color: $primary-color; /* Schriftfarbe */
+        text-decoration: none; /* Entfernt Unterstreichung */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Leichte Abgrenzung zwischen den Links */
+        font-size: 1.6rem; /* Etwas größere Schriftgröße */
+        width: 100%; /* Stellt sicher, dass der Link die gesamte Breite der Sidebar einnimmt */
+    }
+
+    .sidebar-menu a:hover {
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.2
+        ); /* Hintergrundfarbe beim Hover */
+    }
+
+    /* Sidebar Anpassungen */
+    .sidebar-menu .dropdown-menu {
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.95
+        ); /* Gleiches Design wie die Sidebar */
+        border-radius: 0 10px 10px 0;
+        box-shadow: none; /* Entfernt den Schatten */
+        display: none; /* Standardmäßig ausgeblendet */
+        flex-direction: column; /* Stellt sicher, dass die Dropdown-Links vertikal gestapelt sind */
+        padding: 0; /* Entfernt überflüssige Polsterung */
+        overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers sichtbar ist */
+        max-height: 0; /* Startwert für das Zusammenklappen */
+        font-size: 1.4rem; /* Etwas größere Schriftgröße */
+        transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Übergangseffekt für das Ausrollen des Menüs */
+    }
+
+    .sidebar-menu .dropdown-menu.open {
+        display: flex; /* Zeigt das Dropdown-Menü an, wenn es geöffnet ist */
+        max-height: 500px; /* Maximale Höhe für das Ausrollen */
+        padding: 10px 20px; /* Fügt Polsterung hinzu, wenn das Menü geöffnet ist */
+    }
+
+    .sidebar-menu .dropdown-toggle::after {
+        content: "\25BC"; /* Pfeil nach unten */
+        float: right;
+        margin-left: 5px;
+        color: #fff; /* Stellt sicher, dass der Pfeil auch gut sichtbar ist */
+    }
+}
+
+/* Anpassungen für iPad 8th Generation - Querformat */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+    .hamburger-menu,
+    .sidebar-menu {
+        display: none; // Blendet das Hamburger-Menü und die Sidebar aus
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row; // Header-Inhalte in einer Zeile
+        justify-content: space-between; // Platzierung der Inhalte am Rand
+        align-items: center; // Vertikale Ausrichtung der Elemente in der Mitte
+        height: 90px;
+        width: 100%; // Volle Breite des Headers
+        margin: 0;
+        padding: 10px; // Polsterung für etwas Abstand innerhalb des Headers
+        box-sizing: border-box; // Inkludiert Padding und Border in die Gesamtbreite
+    }
+
+    .header-right {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .logo-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start; // Links ausgerichtet im Container
+        white-space: nowrap; // Verhindert Zeilenumbruch im Logo
+        margin-right: 0; // Platz zwischen Logo und Navigation
+        width: auto;
+    }
+
+    .logo {
+        font-size: 2.2rem; // Schriftgröße des Logos im Querformat
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000; // Schwarzer Rand um die Schrift
+        white-space: nowrap; // Verhindert Zeilenumbruch innerhalb des Logos
+        padding-left: 0;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: flex-start; // Ausrichtung der Links am linken Rand
+        align-items: center; // Zentriert die Navigation vertikal in der Mitte
+        padding: 10px; // Reduzierte Polsterung innerhalb des Containers
+        background-color: $background-color-light;
+        border-radius: $radius-md;
+        box-shadow: $box-shadow-focused-medium;
+        gap: 4px; // Geringer Abstand zwischen den Navigationslinks
+        width: auto; // Nutzt die Breite entsprechend dem Inhalt
+        max-width: 100%; // Begrenzung der maximalen Breite für die Navigation auf 100% der Elternelementbreite
+        margin-right: 20px;
+        margin-left: 10px;
+        white-space: nowrap; // Verhindert Zeilenumbruch innerhalb des Containers
+
+        a,
+        .dropdown-toggle {
+            display: inline-block; // Stellt sicher, dass die Links inline angezeigt werden
+            font-family: $font-family-default;
+            font-size: $font-size-xs; // Kleinere Schriftgröße für mobile Geräte
+            color: $primary-color; // Farbe der Links
+            text-decoration: none; // Entfernt Unterstreichung der Links
+            padding: 0 8px; // Polsterung innerhalb der Links für mehr Abstand
+            border: 2px solid transparent;
+            border-radius: $radius-sm;
+            transition: all $transition-normal;
+
+            &:hover {
+                background-color: $primary-color-light; // Hintergrundfarbe beim Hover
+                color: $white-color; // Textfarbe beim Hover
+                border-color: $primary-color;
+                transform: translateY(-2px);
+                cursor: pointer;
+            }
+        }
+    }
+
+    #current-month-year {
+        font-size: 0.8rem; // Kleinere Schriftgröße für "Your Score in August 2024"
+    }
+
+    .progress-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end; // Rechts ausgerichtet im Container
+        width: 150px; // Kleinere Breite im Querformat
+        height: 15px; // Größere Höhe für das Fire 7 im Hochformat
+        border-radius: 7px;
+        margin-left: 0;
+    }
+
+    .clock-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        background: $accent-color-desaturated; // Use a desaturated accent color for a subtle background
+        border-radius: $radius-md;
+        box-shadow: $box-shadow-focused-medium; // Moderate shadow for depth
+        margin-left: 20px;
+        width: auto;
+
+        .clock {
+            font-size: 0.8rem; // Kleinere Schriftgröße für die Uhr im Querformat
+            padding: 2px 0px;
+        }
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: $accent-color-desaturated;
+        border-radius: $radius-xs;
+        box-shadow: $box-shadow-focused-strong;
+        z-index: 1500;
+        min-width: 220px;
+
+        a {
+            font-size: $font-size-xxs;
+            padding: $spacing-xs $spacing-sm;
+            display: block;
+
+            &:hover {
+                color: $secondary-color;
+                background-color: $primary-color-desaturated;
+            }
+        }
+    }
+}
+
+/* Anpassungen für Fire 7 (9. Generation) - Hochformat */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+    .nav-container,
+    .clock,
+    .clock-container {
+        display: none; // Entfernt die Uhr und andere rechte Header-Elemente
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column; // Macht den Header-Inhalt vertikal
+        align-items: center; // Zentriert die Inhalte horizontal
+        position: relative; // Ermöglicht die Positionierung des Hamburger-Menüs
+        height: 120px;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; // Nimmt die gesamte Breite des Headers ein
+    }
+
+    .logo {
+        font-size: 3rem; // Schriftgröße des Logos
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000; // Schwarzer Rand um die Schrift
+        white-space: nowrap; // Verhindert Zeilenumbruch innerhalb des Logos
+        text-align: center; // Zentriert den Text innerhalb des Logo-Containers
+    }
+
+    .header-right {
+        display: flex;
+        justify-content: center;
+        width: 100%; // Nimmt die gesamte Breite unter dem Logo ein
+        flex-direction: column; // Stellt sicher, dass die Elemente untereinander erscheinen
+        align-items: center; // Zentriert die Elemente horizontal
+    }
+
+    // Erhöhte Höhe für den progress-container
+    .progress-container {
+        height: 20px; // Größere Höhe für das Fire 7 im Hochformat
+    }
+
+    .hamburger-menu,
+    .sidebar-menu {
+        display: flex; /* Blendet das Hamburger-Menü und die Sidebar im Hochformat ein */
+    }
+
+    .hamburger-menu {
+        display: flex; /* Aktiviert das Hamburger-Menü */
+        flex-direction: column; /* Stellt sicher, dass die Striche vertikal gestapelt werden */
+        justify-content: space-between; /* Platzierung der Striche mit gleichem Abstand */
+        align-items: center; /* Zentriert das Hamburger-Menü vertikal */
+        position: absolute;
+        right: 20px; /* Positioniert das Hamburger-Menü 20px vom rechten Rand */
+        top: 40px; /* Positioniert das Hamburger-Menü 40px vom oberen Rand des Headers */
+        z-index: 2000; /* Stellt sicher, dass das Hamburger-Menü über anderen Elementen liegt */
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.8
+        ); /* Setzt einen halbtransparenten Hintergrund, um es besser sichtbar zu machen */
+        padding: 10px; /* Fügt etwas Polsterung hinzu, um den Klickbereich zu vergrößern */
+        border-radius: 5px; /* Fügt abgerundete Ecken hinzu */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Fügt einen leichten Schatten hinzu, um es hervorzuheben */
+    }
+
+    .hamburger-menu span {
+        background-color: #333; /* Setzt die Farbe der Linien auf ein dunkles Grau */
+        height: 3px; /* Erhöht die Dicke der Linien für bessere Sichtbarkeit */
+        width: 25px; /* Setzt die Breite der Linien */
+        margin: 2px 0; /* Fügt minimalen Abstand zwischen den Linien hinzu */
+        border-radius: 2px; /* Fügt abgerundete Ecken zu den Linien hinzu */
+    }
+
+    /* Sidebar Anpassungen */
+    .sidebar-menu {
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.603
+        ); /* Weniger transparenter Hintergrund für bessere Lesbarkeit */
+        color: $primary-color; /* Schriftfarbe */
+        width: 250px; /* Breite der Sidebar */
+        position: fixed; /* Fixiert die Sidebar an der Seite */
+        top: 0;
+        right: -250px; /* Versteckt die Sidebar standardmäßig außerhalb des Bildschirms */
+        height: 100%;
+        z-index: 3000; /* Stellt sicher, dass die Sidebar über dem Hauptinhalt liegt */
+        transition: right 0.3s ease, background-color 0.3s ease; /* Animiert das Ein- und Ausblenden der Sidebar sowie den Hintergrund */
+        box-shadow: -2px 0 6px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu, um die Sidebar vom Inhalt abzuheben */
+        border-radius: 0 10px 10px 0; /* Runde Ecken an der linken Seite */
+        padding-top: 150px; /* Platz für den Headerbereich */
+        pointer-events: none; /* Verhindert, dass die Sidebar Klicks registriert, wenn sie geschlossen ist */
+        display: flex;
+        flex-direction: column; /* Stellt sicher, dass die Inhalte der Sidebar vertikal gestapelt sind */
+    }
+
+    .sidebar-menu.open {
+        right: 0; /* Schiebt die Sidebar ins Sichtfeld */
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.603
+        ); /* Stellt sicher, dass die Sidebar einen weniger transparenten Hintergrund hat */
+        pointer-events: auto; /* Erlaubt Klicks auf die Sidebar, wenn sie geöffnet ist */
+    }
+
+    .sidebar-menu a {
+        display: block;
+        padding: 15px 20px; /* Polsterung für Links innerhalb der Sidebar */
+        color: $primary-color; /* Schriftfarbe */
+        text-decoration: none; /* Entfernt Unterstreichung */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Leichte Abgrenzung zwischen den Links */
+        font-size: 1.6rem; /* Etwas größere Schriftgröße */
+        width: 100%; /* Stellt sicher, dass der Link die gesamte Breite der Sidebar einnimmt */
+    }
+
+    .sidebar-menu a:hover {
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0.2
+        ); /* Hintergrundfarbe beim Hover */
+    }
+
+    /* Sidebar Anpassungen */
+    .sidebar-menu .dropdown-menu {
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.95
+        ); /* Gleiches Design wie die Sidebar */
+        border-radius: 0 10px 10px 0;
+        box-shadow: none; /* Entfernt den Schatten */
+        display: none; /* Standardmäßig ausgeblendet */
+        flex-direction: column; /* Stellt sicher, dass die Dropdown-Links vertikal gestapelt sind */
+        padding: 0; /* Entfernt überflüssige Polsterung */
+        overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers sichtbar ist */
+        max-height: 0; /* Startwert für das Zusammenklappen */
+        font-size: 1.4rem; /* Etwas größere Schriftgröße */
+        transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Übergangseffekt für das Ausrollen des Menüs */
+    }
+
+    .sidebar-menu .dropdown-menu.open {
+        display: flex; /* Zeigt das Dropdown-Menü an, wenn es geöffnet ist */
+        max-height: 500px; /* Maximale Höhe für das Ausrollen */
+        padding: 10px 20px; /* Fügt Polsterung hinzu, wenn das Menü geöffnet ist */
+    }
+
+    .sidebar-menu .dropdown-toggle::after {
+        content: "\25BC"; /* Pfeil nach unten */
+        float: right;
+        margin-left: 5px;
+        color: #fff; /* Stellt sicher, dass der Pfeil auch gut sichtbar ist */
+    }
+}
+
+/* Anpassungen für Fire 7 (9. Generation) - Querformat */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .hamburger-menu,
+    .sidebar-menu {
+        display: none; // Blendet das Hamburger-Menü und die Sidebar aus
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row; // Header-Inhalte in einer Zeile
+        justify-content: space-between; // Platzierung der Inhalte am Rand
+        align-items: center; // Vertikale Ausrichtung der Elemente in der Mitte
+        height: 120px;
+        max-width: 100vw;
+        margin: 0;
+        padding: 10px; // Polsterung für etwas Abstand innerhalb des Headers
+    }
+
+    .header-right {
+        margin-right: 30px;
+        margin-left: 0;
+    }
+
+    .logo-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start; // Links ausgerichtet im Container
+        white-space: nowrap; // Verhindert Zeilenumbruch im Logo
+        margin-right: 0; // Platz zwischen Logo und Navigation
+    }
+
+    .logo {
+        font-size: 2rem; // Schriftgröße des Logos im Querformat
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000; // Schwarzer Rand um die Schrift
+        white-space: nowrap; // Verhindert Zeilenumbruch innerhalb des Logos
+        padding-left: 0;
+    }
+
+    .nav-container {
+        flex: 2; // Weniger Platz für die Navigation
+        display: flex; // Aktiviert die Desktop-Navigation im Querformat
+        justify-content: center; // Zentriert die Navigation zwischen Logo und Progress-Bar
+        align-items: center;
+        gap: 2px; // Abstand zwischen den Navigationslinks
+        background-color: $background-color-light;
+        border-radius: $radius-md;
+        box-shadow: $box-shadow-focused-medium;
+        max-width: 500px; // Begrenzung der maximalen Breite für die Navigation
+        margin-right: 30px;
+        padding: 12px 5px;
+    }
+
+    .nav-container a,
+    .dropdown-toggle {
+        font-family: $font-family-default;
+        font-size: $font-size-xs;
+        color: $primary-color;
+        text-decoration: none;
+        padding: $spacing-xxs 6px;
+        border: 2px solid transparent;
+        border-radius: $radius-sm;
+        transition: all $transition-normal;
+
+        &:hover {
+            background-color: $primary-color-light;
+            color: $white-color;
+            border-color: $primary-color;
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+    }
+
+    .progress-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end; // Rechts ausgerichtet im Container
+        width: 150px; // Kleinere Breite im Querformat
+        height: 15px; // Geringere Höhe im Querformat
+        border-radius: 7px;
+        margin-left: 0;
+    }
+
+    .progress-bar {
+        height: 10px;
+        line-height: 10px;
+    }
+
+    #current-month-year {
+        font-size: 0.8rem; // Kleinere Schriftgröße für "Your Score in August 2024"
+    }
+
+    .clock-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        background: $accent-color-desaturated; // Use a desaturated accent color for a subtle background
+        border-radius: $radius-md;
+        box-shadow: $box-shadow-focused-medium; // Moderate shadow for depth
+        margin-left: 0;
+
+        .clock {
+            font-family: $font-family-headline; // Stylish cursive for the clock
+            font-size: 0.8rem; // Kleinere Schriftgröße für "Your Score in August 2024"
+            color: $dark-color; // Dark color for contrast
+            padding: 2px 4px;
+            border: 1px solid $primary-color; // Kleinere Solid-Border using the primary color
+            background-color: $background-color-less-transparent; // Less transparent background for readability
+            border-radius: $radius-sm;
+            box-shadow: $box-shadow-hover-medium; // Hover effect shadow for interactivity
+            position: relative;
+        }
+    }
+
+    .dropdown {
+        position: relative;
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: $accent-color-desaturated;
+            border-radius: $radius-xs;
+            box-shadow: $box-shadow-focused-strong;
+            z-index: 1500;
+            min-width: 220px;
+
+            a {
+                font-size: $font-size-xxs;
+                padding: $spacing-xs $spacing-sm;
+                display: block;
+
+                &:hover {
+                    color: $secondary-color;
+                    background-color: $primary-color-desaturated;
+                }
+            }
+        }
+
+        &:hover .dropdown-menu {
+            display: block; // Zeigt das Dropdown-Menü bei Hover
+        }
+    }
+}
+
+.highlight {
+    background-color: yellow;
+    color: red;
+}
+
+/* Snackbar Styles */
+#snackbar-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.snackbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    margin-bottom: 15px;
+    padding: 16px 24px;
+    color: #000000;
+    background-color: #333;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.snackbar::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    border-radius: 12px;
+    z-index: -1;
+    animation: gradient 6s ease infinite;
+    transition: all 0.5s ease;
+}
+
+@keyframes gradient-success {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient-failure {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.snackbar.success {
+    background-color: #4caf50;
+}
+
+.snackbar.success::before {
+    background: linear-gradient(45deg, #388e3c, #66bb6a, #a5d6a7, #4caf50);
+    background-size: 200% 200%;
+    animation: gradient-success 6s ease infinite;
+}
+
+.snackbar.failure {
+    background-color: #f44336;
+}
+
+.snackbar.failure::before {
+    background: linear-gradient(45deg, #d32f2f, #e57373, #ffcdd2, #f44336);
+    background-size: 200% 200%;
+    animation: gradient-failure 6s ease infinite;
+}
+
+.snackbar.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.snackbar.hide {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 20px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 20px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}

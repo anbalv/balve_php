@@ -1,0 +1,168 @@
+body {
+    background-color: #f6f3ea; /* Hintergrundfarbe */
+}
+
+/* Füge einen neuen div für den Hintergrund hinzu */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    background: url("/images/background.jpg") no-repeat center center;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #f6f3ea;
+    opacity: 0;
+    animation: fade-in-animation 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-animation {
+    to {
+        opacity: 1;
+    }
+}
+
+.center-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.welcome-button {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 20%), 0 6px 6px rgb(0 0 0 / 23%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.welcome-button:hover {
+    padding: 25px 45px;
+    box-shadow: 0 12px 24px rgb(0 0 0 / 20%), 0 8px 8px rgb(0 0 0 / 23%);
+}
+
+.slogan-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.slogan {
+    position: absolute;
+    color: #000;
+    white-space: nowrap;
+    z-index: 5;
+}
+
+/* Animationen für jeden Slogan */
+.slogan1,
+.slogan2,
+.slogan3,
+.slogan4,
+.slogan5,
+.slogan6 {
+    font-size: 3em;
+    opacity: 0;
+}
+
+.slogan1 {
+    top: 20%;
+    left: 12%;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    animation: fade-in-slogan-a 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-a {
+    to {
+        opacity: 0.7;
+    }
+}
+
+.slogan2 {
+    top: 8%;
+    right: 9%;
+    font-family: Verdana, sans-serif;
+    font-style: italic;
+    animation: fade-in-slogan-b 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-b {
+    to {
+        opacity: 0.6;
+    }
+}
+
+.slogan3 {
+    bottom: 25%;
+    left: 15%;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-style: italic;
+    animation: fade-in-slogan-c 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-c {
+    to {
+        opacity: 0.5;
+    }
+}
+
+.slogan4 {
+    bottom: 60%;
+    right: 1%;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    animation: fade-in-slogan-d 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-d {
+    to {
+        opacity: 0.7;
+    }
+}
+
+.slogan5 {
+    top: 50%;
+    left: 5%;
+    font-family: Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    animation: fade-in-slogan-e 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-e {
+    to {
+        opacity: 0.9;
+    }
+}
+
+.slogan6 {
+    top: 80%;
+    right: 8%;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    animation: fade-in-slogan-f 3s ease-in-out 1 forwards;
+}
+
+@keyframes fade-in-slogan-f {
+    to {
+        opacity: 0.3;
+    }
+}

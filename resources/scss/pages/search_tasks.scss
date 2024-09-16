@@ -1,0 +1,252 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.search-form {
+  display: flex;
+  flex-direction: row; // Elemente horizontal anordnen
+  justify-content: space-around;
+  align-items: center; // Elemente vertikal zentrieren
+  background: $gradient-custom;
+  padding: $margin-md;
+  border-radius: $radius-md;
+  box-shadow: $box-shadow-focused-medium;
+  animation: formAnimation 1s ease-out forwards;
+}
+
+.search-form:hover {
+  box-shadow: $box-shadow-focused-strong;
+}
+
+.search-form .search-form-group {
+  margin-right: $margin-sm; // Abstand zwischen den Elementen
+}
+
+.search-form .search-form-label,
+.search-form input,
+.search-form select,
+.search-form button {
+  padding: $margin-sm;
+  border-radius: $radius-md;
+  transition: border-color $transition-fast;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+  border-color: $primary-color;
+  outline: none;
+}
+
+.search-form button {
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $white-color;
+  transition: background-color $transition-fast;
+  margin-right: $margin-sm; // Abstand zwischen den Buttons
+}
+
+.search-form button:last-child {
+  margin-right: 0; // Entfernt den rechten Rand vom letzten Button
+}
+
+.search-form button:hover {
+  background-color: $primary-color-dark;
+}
+
+// Spezifische Stile für Labels, falls notwendig
+.search-form .search-form-label {
+  font-weight: bold; // Optional: um Labels hervorzuheben
+  color: $white-color;
+}
+
+.search-container {
+  min-width: 90%; // Oder jede gewünschte feste Breite
+  margin: auto;
+  padding: $margin-lg;
+  box-shadow: $box-shadow-focused-light;
+}
+
+.login-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; // Sorgt für gleichmäßigen Abstand zwischen den Karten
+  margin: 0 auto;
+  margin-top: $margin-xl;
+  min-width: 90%; // Oder jede gewünschte feste Breite
+}
+
+.card {
+  flex: 0 0 calc(33.333% - $margin-sm * 2);
+  box-sizing: border-box;
+  margin-bottom: $margin-lg;
+  background: $white-color;
+  border-radius: $radius-lg;
+  padding: $margin-md;
+  box-shadow: $box-shadow-soft-medium;
+  font-family: $font-family-default;
+  opacity: 0; // Setzen Sie die Karten anfänglich auf unsichtbar
+  visibility: hidden; // Macht die Karte anfänglich unsichtbar
+  transition:
+    opacity 1s ease-in-out,
+    visibility 0s linear 1s,
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out; // Verlängert die Übergangszeit und fügt Übergänge für Transformation und Schatten hinzu
+
+  &:hover {
+    transform: scale(1.05); // Skaliert die Karte beim Hover leicht hoch
+    box-shadow: $box-shadow-focused-medium; // Fügt einen stärkeren Schatten hinzu, um Tiefe zu erzeugen
+  }
+}
+
+.card.show {
+  opacity: 1; // Macht die Karte sichtbar
+  visibility: visible; // Stellt die Sichtbarkeit der Karte wieder her
+  transition-delay: 0s, 0s; // Stellt sicher, dass die Verzögerung für das Einblenden entfernt wird
+}
+
+.loading-indicator {
+  display: none; // Verbirgt den Indikator standardmäßig
+  width: 100%; // Nimmt die volle Breite des Containers ein
+  text-align: center; // Zentriert den Text horizontal
+  font-size: 1.7rem; // Vergrößert die Schriftgröße
+  color: $primary-color; // Verwendet die Primärfarbe für den Text
+  padding: $margin-lg 0; // Fügt oben und unten einen Abstand hinzu
+}
+
+.login-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $margin-sm;
+}
+
+.login-card-header-title {
+  font-size: $font-size-lg;
+  color: $dark-color;
+  font-weight: $font-weight-bold;
+}
+
+.login-card-header-info,
+.login-card-header-date {
+  font-size: $font-size-sm;
+  color: $neutral-gray;
+}
+
+.login-card-header-date {
+  text-align: right;
+}
+
+.card-details a:hover {
+  text-decoration: underline;
+}
+
+.card-checkbox {
+  margin-top: $margin-sm;
+}
+
+.login-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item {
+  display: flex;
+  gap: $spacing-xs; // Abstand zwischen Label und Inhalt
+}
+
+.detail-label {
+  width: 120px; // feste Breite für Labels
+  font-weight: $font-weight-bold;
+  text-align: left; // Inhalt linksbündig ausrichten
+  font-size: $font-size-sm;
+}
+
+.detail-content {
+  flex-grow: 1; // nimmt den verbleibenden Platz ein
+  text-align: left; // Inhalt linksbündig ausrichten
+  font-size: $font-size-sm;
+}
+
+.detail-link a {
+  display: block; // macht den Link zu einem Block-Element
+  margin-top: $margin-xs; // Abstand nach oben
+  color: $primary-color;
+  text-decoration: none;
+}
+
+.detail-link a:hover {
+  text-decoration: underline;
+}
+
+.login-card-body p {
+  font-size: $font-size-xs;
+  margin-top: $margin-xs;
+  font-style: italic; // Setzt den Text auf kursiv
+}
+
+.login-card-body a {
+  font-size: $font-size-sm;
+}
+
+.selected-dropdown {
+  background-color: $secondary-color;
+  border: 3px solid $accent-color;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: $white-color;
+  margin: 15% auto;
+  padding: $margin-lg;
+  border: 1px solid $neutral-gray;
+  width: 80%;
+}
+
+.close-button {
+  color: $neutral-gray;
+  float: right;
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: $dark-color;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// Responsive Anpassungen für kleinere Bildschirme
+@media (max-width: $breakpoint-lg) {
+  .card {
+    flex: 0 0 calc(50% - $margin-sm * 2); // Zwei Karten nebeneinander auf größeren Bildschirmen
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .card {
+    flex: 0 0 calc(100% - $margin-sm * 2); // Eine Karte nimmt die volle Breite auf mittleren Bildschirmen ein
+  }
+}
+
+.loading-indicator {
+  display: none;
+  text-align: center;
+  font-size: 1.5em;
+  color: #000;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  padding: 10px;
+}

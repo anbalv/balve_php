@@ -1,0 +1,581 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1800px; // Optional: Begrenze die Gesamtbreite
+  margin: 20px auto;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+#points-summary-container {
+  flex: 1;
+  max-width: 40%; // Begrenze die Breite auf 40%
+  margin-right: 40px; // Reduzierter Abstand für bessere Darstellung
+  background-color: $white-color;
+  box-shadow: $box-shadow-deep-medium;
+  border-radius: $radius-md;
+  padding: 20px;
+}
+
+#points-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid $neutral-gray;
+    padding: $spacing-xs;
+    text-align: left;
+    font-family: $font-family-default;
+    font-size: $font-size-sm;
+  }
+
+  th {
+    background-color: $primary-color-light;
+    color: $white-color;
+    font-weight: $font-weight-medium;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $background-color-light;
+  }
+
+  tbody tr:hover {
+    background-color: $background-color-medium;
+  }
+}
+
+#calendar-container {
+  flex: 2;
+  max-width: 60%;
+  padding: 20px;
+  background-color: $white-color;
+  box-shadow: $box-shadow-deep-medium;
+  border-radius: $radius-md;
+  height: 550px;
+}
+
+#calendar-header {
+  display: flex;
+  justify-content: space-between; // Positioniert die Buttons an den äußeren Rändern
+  align-items: center;
+  height: 80px;
+  position: relative;
+
+  .push-pin {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    z-index: 1;
+  }
+
+  button {
+    background-color: $primary-color;
+    color: $white-color;
+    border: none;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-color-dark;
+    }
+  }
+
+  #current-month-year {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
+    font-family: "Edu QLD Beginner", cursive;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; // Stellt sicher, dass das Datum sichtbar ist
+  }
+}
+
+#calendar {
+  perspective: 1000px;
+}
+
+.month-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  background-color: $light-color;
+  border-radius: $radius-md;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 1s ease-in-out;
+  transform-origin: top center;
+  padding: 20px;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: $font-weight-bold;
+  padding: $spacing-xs;
+  background-color: $primary-color;
+  color: $white-color;
+  border-radius: $radius-sm;
+  box-shadow: $box-shadow-soft-medium;
+  font-family: $font-family-headline;
+}
+
+.calendar-day {
+  border: 1px solid $neutral-gray;
+  padding: 15px;
+  cursor: pointer;
+  background-color: $white-color;
+  border-radius: $radius-sm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-size-md;
+  box-shadow: $box-shadow-soft-medium;
+  transition: all $transition-normal;
+
+  &:hover {
+    background-color: $primary-color-light;
+    box-shadow: $box-shadow-hover-medium;
+    transform: scale($hover-scale-small);
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: $white-color;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid $neutral-gray;
+  width: 80%;
+  border-radius: $radius-md;
+  box-shadow: $box-shadow-focused-medium;
+}
+
+.close {
+  color: $neutral-gray;
+  float: right;
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+
+  &:hover,
+  &:focus {
+    color: $soft-black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+#modal-date {
+  font-family: $font-family-headline;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $dark-color;
+  margin-bottom: $margin-md;
+}
+
+#tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid $neutral-gray;
+    padding: $spacing-xs;
+    text-align: left;
+    font-family: $font-family-default;
+    font-size: $font-size-sm;
+  }
+
+  th {
+    background-color: $primary-color-light;
+    color: $white-color;
+    font-weight: $font-weight-medium;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $background-color-light;
+  }
+
+  tbody tr:hover {
+    background-color: $background-color-medium;
+  }
+}
+
+#user-points-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#user-points-table th,
+#user-points-table td {
+  border: 1px solid $neutral-gray;
+  padding: $spacing-xs;
+  text-align: left;
+  font-family: $font-family-default;
+  font-size: $font-size-sm;
+}
+
+#user-points-table th {
+  background-color: $primary-color-light;
+  color: $white-color;
+  font-weight: $font-weight-medium;
+}
+
+#user-points-table .bold-column {
+  font-weight: bold;
+}
+
+#user-points-table tbody tr:nth-child(even) {
+  background-color: $background-color-light;
+}
+
+#user-points-table tbody tr:hover {
+  background-color: $background-color-medium;
+}
+
+.double-underline {
+  text-decoration: underline;
+  text-decoration-style: double;
+}
+
+.month-year-display {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert die Elemente horizontal */
+    padding: 20px;
+  }
+
+  #points-summary-container {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+
+  #calendar-container {
+    max-width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  #calendar-header {
+    display: flex;
+    flex-direction: row; /* Anordnung der Elemente in einer Zeile */
+    align-items: center;
+    height: auto;
+    padding: 10px 0;
+
+    .push-pin {
+      top: -40px;
+      width: 50px;
+      height: 50px;
+    }
+
+    button {
+      margin: 0 10px;
+      background-color: $primary-color;
+      color: $white-color;
+      border: none;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $radius-sm;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+    }
+
+    #current-month-year-display {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #343a40;
+      font-family: "Edu QLD Beginner", cursive;
+      margin: 0 10px;
+    }
+  }
+
+  .month-container {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .calendar-day {
+    padding: 10px;
+    font-size: $font-size-sm;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  #tasks-table th,
+  #tasks-table td {
+    font-size: $font-size-xs;
+    padding: $spacing-xs;
+  }
+
+  #user-points-table th,
+  #user-points-table td {
+    font-size: $font-size-xs;
+    padding: $spacing-xs;
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+  .content-container {
+    flex-direction: row; /* Elemente horizontal anordnen */
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  #points-summary-container {
+    max-width: 45%; /* Leicht reduzierter Platz für den Punkte-Container */
+    margin-right: 5px; /* Weniger Abstand zwischen den Containern */
+  }
+
+  #calendar-container {
+    max-width: 60%; /* Leicht reduzierter Platz für den Kalender */
+    height: auto; /* Automatische Höhe für flexibles Layout */
+    padding: 15px;
+  }
+
+  #calendar-header {
+    height: auto;
+    justify-content: space-between; /* Buttons und Datum auf gleicher Linie */
+    align-items: center;
+
+    .push-pin {
+      top: -40px; /* Anpassung der Position der Push Pin */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px; /* Reduziere die Größe der Push Pin */
+      height: 60px;
+    }
+
+    button {
+      margin-top: 0; /* Entferne Abstände zwischen den Buttons */
+    }
+
+    #current-month-year {
+      position: static; /* Entferne absolute Positionierung */
+      margin-top: 10px;
+    }
+  }
+
+  .month-container {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px; /* Weniger Abstand für kompaktere Darstellung */
+    padding: 10px;
+  }
+
+  .calendar-day {
+    padding: 10px; /* Weniger Padding für kompakteres Layout */
+    font-size: $font-size-sm;
+  }
+
+  .modal-content {
+    width: 90%; /* Größere Breite für modales Fenster */
+    margin-top: 20%;
+  }
+}
+
+#user-points-table th,
+#user-points-table td {
+  font-size: $font-size-xs;
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert die Container horizontal */
+    padding: 5px; /* Reduziert das Padding für kleinere Bildschirme */
+  }
+
+  #points-summary-container {
+    max-width: 100%; /* Nutzt die gesamte Breite */
+    margin-right: 0; /* Entfernt den rechten Margin */
+    margin-bottom: 20px; /* Fügt einen unteren Abstand hinzu */
+    padding: 15px; /* Reduziert das Padding */
+  }
+
+  #calendar-container {
+    max-width: 100%; /* Nutzt die gesamte Breite */
+    height: auto; /* Passt die Höhe automatisch an */
+    padding: 15px; /* Reduziert das Padding */
+  }
+
+  #calendar-header {
+    display: flex;
+    flex-direction: row; /* Anordnung der Elemente in einer Zeile */
+    align-items: center;
+    height: 60px; /* Reduzierte Höhe */
+
+    .push-pin {
+      width: 50px;
+      height: 50px;
+      top: -30px; /* Reduziert den Abstand nach oben */
+    }
+
+    button {
+      padding: 5px 10px; /* Verkleinert die Buttons */
+    }
+
+    #current-month-year {
+      font-size: 1.5rem; /* Verkleinert den Text */
+    }
+  }
+
+  .month-container {
+    gap: 5px; /* Verkleinert den Abstand zwischen den Tagen */
+    padding: 10px; /* Reduziert das Padding */
+  }
+
+  .calendar-day {
+    padding: 10px; /* Verkleinert die Tagesboxen */
+  }
+
+  .modal-content {
+    width: 90%; /* Erhöht die Breite der Modalbox auf 90% */
+    padding: 15px; /* Verkleinert das Padding */
+  }
+
+  #tasks-table th,
+  #tasks-table td {
+    font-size: $font-size-xs; /* Verkleinert den Text in der Tabelle */
+  }
+
+  #user-points-table th,
+  #user-points-table td {
+    font-size: $font-size-xs; /* Verkleinert den Text in der Punkte-Tabelle */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .content-container {
+    display: flex;
+    flex-direction: row; /* Anordnung der Container nebeneinander */
+    justify-content: center; /* Zentriere beide Container horizontal */
+    align-items: flex-start; /* Vertikale Ausrichtung am oberen Rand */
+    padding: 10px;
+  }
+
+  #points-summary-container {
+    flex: 1; /* Verteile den Platz gleichmäßig */
+    max-width: 42%; /* Begrenze die Breite des Punkte-Containers */
+    margin-right: 10px; /* Etwas Abstand zwischen den Containern */
+    margin-bottom: 0;
+    box-shadow: $box-shadow-hover-strong;
+  }
+
+  #calendar-container {
+    flex: 1; /* Verteile den Platz gleichmäßig */
+    max-width: 57%; /* Begrenze die Breite des Kalenders */
+    height: auto; /* Verhindert abgeschnittene Höhe bei kleineren Bildschirmen */
+    padding: 20px;
+    box-shadow: $box-shadow-hover-strong;
+  }
+
+  #calendar-header {
+    height: auto;
+    display: flex;
+    flex-direction: row; /* Anordnung von Monat, Jahr und Buttons nebeneinander */
+    justify-content: space-between; /* Verteile die Elemente gleichmäßig */
+    align-items: center;
+
+    .push-pin {
+      width: 50px;
+      height: 50px;
+      top: -30px;
+    }
+
+    button {
+      padding: $spacing-xs $spacing-xs;
+    }
+
+    #current-month-year {
+      font-size: 1.5rem;
+    }
+  }
+
+  #calendar {
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px; /* Weniger Platz zwischen den Tagen */
+  }
+
+  .calendar-day {
+    padding: 10px;
+    font-size: $font-size-sm;
+    box-shadow: none; /* Weniger Schatten für simplere Darstellung */
+  }
+
+  .modal-content {
+    width: 90%; /* Breitere Modale für kleinere Bildschirme */
+    margin-top: 30%;
+  }
+
+  #tasks-table th,
+  #tasks-table td {
+    font-size: $font-size-xs; /* Kleinere Schrift für bessere Lesbarkeit */
+    padding: $spacing-xxs;
+  }
+
+  #user-points-table th,
+  #user-points-table td {
+    font-size: $font-size-xs;
+    padding: $spacing-xxs;
+  }
+
+  .month-container {
+    padding: 10px; /* Weniger Padding für mobile Darstellung */
+    gap: 5px; /* Reduziere den Abstand zwischen den Tagen */
+  }
+
+  .day-header {
+    font-size: $font-size-sm;
+    padding: $spacing-xxs;
+  }
+}

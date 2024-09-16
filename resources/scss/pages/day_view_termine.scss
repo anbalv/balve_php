@@ -1,0 +1,607 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.horizontal-sections-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+@keyframes roll-down {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+.horizontal-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: auto;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, $secondary-color-light, rgba(0, 0, 0, 0));
+    transform: scaleY(0); /* Startet mit keiner Höhe sichtbar */
+    transform-origin: top; /* Transformation beginnt von oben */
+    animation: roll-down 1s ease-out forwards;
+    z-index: 0;
+  }
+}
+
+.no-events,
+.error-message {
+  margin-top: 0;
+  padding-top: 3px; /* Optional: fügt einen kleinen Abstand oben hinzu */
+}
+
+.event-item {
+  padding: $spacing-sm;
+  width: 350px; // Angepasste Breite der Event-Items für bessere Sichtbarkeit
+  max-width: 100%; // Maximal auf die verfügbare Breite begrenzen
+  margin-right: $spacing-sm;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+
+  .birthday-event h3,
+  .work-time-event h3,
+  .general-appointment-event h3 {
+    font-size: $font-size-md;
+    color: $dark-color;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: $spacing-xs;
+      font-weight: $font-weight-extra-bold;
+      color: $dark-color;
+    }
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 2px;
+    margin-left: 10%;
+  }
+
+  .top-bar {
+    height: 100px;
+    margin-bottom: 30px;
+  }
+
+  // Spezifische Stile für verschiedene Event-Typen
+  &.birthday-event h3 {
+    color: $accent-color;
+    font-size: $font-size-md;
+  }
+
+  &.work-time-event h3 {
+    color: $primary-color;
+  }
+
+  &.general-appointment-event h3 {
+    color: $secondary-color-dark;
+    font-size: $font-size-md;
+  }
+
+  .title {
+    font-size: $font-size-md;
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .horizontal-sections-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+
+  @keyframes roll-down {
+    from {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+
+  .horizontal-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: auto;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, $secondary-color-light, rgba(0, 0, 0, 0));
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: roll-down 1s ease-out forwards;
+      z-index: 0;
+    }
+  }
+
+  .top-bar {
+    margin-bottom: 20px;
+  }
+
+  .event-item {
+    padding-top: 15px;
+    width: 300px;
+    max-width: 100%;
+    margin-right: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    .birthday-event h3,
+    .work-time-event h3,
+    .general-appointment-event h3 {
+      font-size: $font-size-sm;
+      color: $dark-color;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: $spacing-xs;
+        font-weight: $font-weight-extra-bold;
+        color: $dark-color;
+      }
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 2px;
+      margin-left: 13%;
+    }
+
+    .top-bar {
+      height: 80px; // Höhe reduziert für besseres Layout
+      margin-bottom: 20px;
+    }
+
+    // Spezifische Stile für verschiedene Event-Typen
+    &.birthday-event h3 {
+      color: $accent-color;
+    }
+
+    &.work-time-event h3 {
+      color: $primary-color;
+    }
+
+    &.general-appointment-event h3 {
+      color: $secondary-color-dark;
+    }
+
+    .title {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-extra-bold;
+    }
+
+    // Anpassung der Breite für spezielle Event-Typen
+    &.work-time-event {
+      width: 375px;
+    }
+
+    &.general-appointment-event {
+      width: 379px;
+    }
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 1080px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .horizontal-sections-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 0;
+  }
+
+  @keyframes roll-down {
+    from {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+
+  .horizontal-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: auto;
+    padding-left: $spacing-md; // Angepasst für mehr Abstand im Querformat
+    padding-right: $spacing-md;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, $secondary-color-light, rgba(0, 0, 0, 0));
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: roll-down 1s ease-out forwards;
+      z-index: 0;
+    }
+  }
+
+  .top-bar {
+    margin-bottom: 20px;
+  }
+
+  .event-item {
+    padding: $spacing-sm; // Erhöhter Abstand für das Querformat
+    width: 400px; // Breite angepasst für besseres Layout
+    max-width: 100%;
+    margin-right: $spacing-sm;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    .birthday-event h3,
+    .work-time-event h3,
+    .general-appointment-event h3 {
+      font-size: $font-size-md; // Größere Schriftgröße für bessere Lesbarkeit
+      color: $dark-color;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: $spacing-xs;
+        font-weight: $font-weight-extra-bold;
+        color: $dark-color;
+      }
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 10%;
+    }
+
+    .top-bar {
+      height: 80px; // Höhe reduziert für bessere Anpassung
+      margin-bottom: 20px;
+    }
+
+    // Spezifische Stile für verschiedene Event-Typen
+    &.birthday-event h3 {
+      color: $accent-color;
+    }
+
+    &.work-time-event h3 {
+      color: $primary-color;
+    }
+
+    &.general-appointment-event h3 {
+      color: $secondary-color-dark;
+    }
+
+    .title {
+      font-size: $font-size-md; // Größere Schriftgröße für bessere Lesbarkeit
+      font-weight: $font-weight-extra-bold;
+    }
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .horizontal-sections-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 15px; // Reduzierter Abstand für kleinere Bildschirme
+  }
+
+  @keyframes roll-down {
+    from {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+
+  .horizontal-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: auto;
+    padding-left: $spacing-xs; // Kleinerer Abstand für kleinere Bildschirme
+    padding-right: $spacing-xs;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 98%;
+      height: 100%;
+      background: linear-gradient(to bottom, #ffeb80, rgba(0, 0, 0, 0));
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: roll-down 1s ease-out forwards;
+      z-index: 0;
+    }
+  }
+
+  .top-bar {
+    margin-bottom: 20px;
+  }
+
+  .event-item {
+    padding: $spacing-xs; // Kleinerer Abstand für kleinere Bildschirme
+    width: 280px; // Breite angepasst für kleinere Bildschirme
+    max-width: 100%;
+    margin-right: $spacing-xs;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    .birthday-event h3,
+    .work-time-event h3,
+    .general-appointment-event h3 {
+      font-size: $font-size-xs; // Kleinere Schriftgröße für kleinere Bildschirme
+      color: $dark-color;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: $spacing-xxs;
+        font-weight: $font-weight-bold;
+        color: $dark-color;
+      }
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 13%;
+    }
+
+    .top-bar {
+      height: 60px; // Höhe reduziert für besseres Layout auf kleineren Bildschirmen
+      margin-bottom: 30px;
+    }
+
+    // Spezifische Stile für verschiedene Event-Typen
+    &.birthday-event h3 {
+      color: $accent-color;
+      font-size: $font-size-xs; // Kleinere Schriftgröße für kleinere Bildschirme
+    }
+
+    &.work-time-event h3 {
+      color: $primary-color;
+      font-size: $font-size-sm; // Kleinere Schriftgröße für kleinere Bildschirme
+    }
+
+    &.general-appointment-event h3 {
+      color: $secondary-color-dark;
+      font-size: $font-size-sm; // Kleinere Schriftgröße für kleinere Bildschirme
+    }
+
+    .title {
+      font-size: $font-size-md; // Kleinere Schriftgröße für kleinere Bildschirme
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .horizontal-sections-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100px;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+
+  .horizontal-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: auto;
+    max-width: calc(100% - 10px);
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 10px;
+    position: relative;
+    overflow: visible;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, $secondary-color-light, rgba(0, 0, 0, 0));
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: roll-down 1s ease-out forwards;
+      z-index: 0;
+    }
+  }
+
+  .top-bar {
+    height: 80px; // Höhe reduziert für bessere Anpassung
+    margin-bottom: 0;
+  }
+
+  .event-item {
+    padding: $spacing-sm; // Erhöhter Abstand für das Querformat
+    width: 400px; // Breite angepasst für besseres Layout
+    max-width: 100%;
+    margin-right: $spacing-sm;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    .birthday-event h3,
+    .work-time-event h3,
+    .general-appointment-event h3 {
+      font-size: $font-size-md;
+      color: $dark-color;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: $spacing-xs;
+        font-weight: $font-weight-extra-bold;
+        color: $dark-color;
+      }
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 10%;
+    }
+
+    .top-bar {
+      height: 80px; // Höhe reduziert für bessere Anpassung
+      margin-bottom: 0;
+    }
+
+    // Spezifische Stile für verschiedene Event-Typen
+    &.birthday-event h3 {
+      color: $accent-color;
+      font-size: $font-size-sm;
+    }
+
+    &.work-time-event h3 {
+      color: $primary-color;
+      font-size: $font-size-md;
+    }
+
+    &.general-appointment-event h3 {
+      color: $secondary-color-dark;
+      font-size: $font-size-md;
+    }
+
+    .title {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  @keyframes roll-down {
+    from {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+}

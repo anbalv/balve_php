@@ -1,0 +1,94 @@
+@import "../base/_variables"; // Stellt sicher, dass Variablen verfügbar sind
+@import "../base/_animations"; // Stellt sicher, dass Animationen importiert werden
+
+// Mixin für abgerundete Ecken
+@mixin box-radius($radius) {
+    border-radius: $radius;
+}
+
+// Neon-Effekt für Hover
+@mixin neon-glow($color) {
+    box-shadow: 0 0 8px $color, 0 0 10px $color;
+}
+
+// Mixin für Schriftstile
+@mixin font-style($size, $weight: $font-weight-regular, $style: normal) {
+    font-size: $size;
+    font-weight: $weight;
+    font-style: $style;
+}
+
+// Glaseffekt Mixin
+@mixin glass-effect($color) {
+    background: $color;
+    border: 1px solid lighten($color, 20%);
+
+    // Fallback für Browser ohne Unterstützung für backdrop-filter
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background: rgba($color, 0.85);
+    }
+
+    // Nutzung von backdrop-filter, wenn unterstützt
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+}
+
+// Mixin für Übergänge
+@mixin transition(
+    $property: all,
+    $duration: $transition-normal,
+    $timing-function: ease
+) {
+    transition: $property $duration $timing-function;
+}
+
+// Responsive Schriftgrößen Mixin
+@mixin responsive-font-size($small, $medium, $large) {
+    font-size: $small;
+
+    @media (min-width: $breakpoint-md) {
+        font-size: $medium;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        font-size: $large;
+    }
+}
+
+// Flexbox Container Mixin
+@mixin flex-container($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+// Schatten Mixin
+@mixin shadow(
+    $color: $shadow-color-default,
+    $x-offset: 0px,
+    $y-offset: 2px,
+    $blur: 4px
+) {
+    box-shadow: $x-offset $y-offset $blur $color;
+}
+
+// Button-Stil Mixin
+@mixin button-style($background-color) {
+    background-color: $background-color;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: darken($background-color, 10%);
+    }
+}
+
+// Schatten Mixin für spezifische Boxen
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}

@@ -1,0 +1,40 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @mixin colorCycle {
+    @keyframes colorCycle {
+      0% {
+        stop-color: $primary-color; /* Strahlendes Blau */
+      }
+      33% {
+        stop-color: $secondary-color; /* Gold */
+      }
+      66% {
+        stop-color: $accent-color; /* Sanftes Lavendel */
+      }
+      100% {
+        stop-color: $primary-color; /* Zurück zu Strahlendes Blau */
+      }
+    }
+  }
+
+  @mixin gradientMove {
+    @keyframes gradientMove {
+      0% {
+        x1: 0%;
+        x2: 0%;
+      }
+      100% {
+        x1: 100%;
+        x2: 200%;
+      }
+    }
+  }

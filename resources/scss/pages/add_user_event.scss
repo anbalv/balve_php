@@ -1,0 +1,845 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.vertical-section#third-section {
+  background-color: $white-color;
+  color: $dark-color;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-focused-medium;
+  width: 80%;
+  height: calc(100% - 1 * 20px);
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert den Inhalt vertikal */
+  align-items: center; /* Zentriert den Inhalt horizontal */
+  transform: scaleY(0);
+  transform-origin: top;
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
+}
+
+.vertical-section#third-section.active {
+  transform: scaleY(1); /* Skalierung auf volle Höhe */
+  padding: 20px;
+  width: 80%;
+  height: calc(100% - 1 * 20px);
+  margin-bottom: 20px;
+}
+
+.vertical-section#third-section h2 {
+  color: $primary-color;
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center; // Zentriert den Text horizontal
+  margin-bottom: $spacing-sm; // Fügt etwas Abstand unter dem H2 hinzu
+}
+
+.vertical-section#third-section form {
+  background-image: url("/static/svg/gradient-primary.svg");
+  padding-bottom: $spacing-lg;
+  padding-top: $spacing-md;
+  border-radius: $radius-md;
+  box-shadow: $box-shadow-hover-medium;
+  margin: $spacing-sm auto; // Zentriert das Formular horizontal und fügt Abstand hinzu
+  display: block; // Stellt sicher, dass das Formular unter dem H2 bleibt
+  width: 90%; // Stellt sicher, dass das Formular nicht die volle Breite einnimmt
+  max-width: 500px; // Beschränkt die maximale Breite des Formulars
+}
+
+.vertical-section#third-section form div label {
+  font-weight: $font-weight-bold;
+  display: block;
+  margin: auto; // Zentriert die Felder horizontal
+  margin-left: 12.5%; // Setzt den linken Abstand der Labels auf 12.5%
+  margin-top: $margin-md;
+  margin-bottom: $margin-sm;
+}
+
+.vertical-section#third-section form div input,
+.vertical-section#third-section form div select,
+.vertical-section#third-section form div textarea {
+  width: 75%; // Ensures the width is enforced
+  margin: auto; // Centers the fields horizontally
+  display: block; // Allows the application of margin: auto
+  border: 1px solid $neutral-gray;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-soft-light;
+  padding: 6px; // Consistent padding
+  box-sizing: border-box; // Includes padding and border in the element's total width
+  -webkit-appearance: none; // Removes default browser styling for WebKit browsers
+  -moz-appearance: none; // Removes default browser styling for Mozilla browsers
+  appearance: none; // Ensures custom styling is applied
+}
+
+// Custom dropdown arrow styling
+.vertical-section#third-section form div select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0l5 5 5-5H0z%22 fill=%22%23000%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px top 10px;
+  background-size: 13px 13px;
+  padding-right: 30px;
+}
+
+.vertical-section#third-section form div textarea {
+  width: 75%; // Breite des Textbereichs
+  height: 120px; // Statische Höhe für einen Textbereich
+  margin: auto; // Zentriert den Textbereich horizontal
+  display: block; // Ermöglicht die Anwendung von margin: auto
+  padding: 6px; // Erhöht den Innenabstand, vergrößert die Höhe
+  border: 1px solid $neutral-gray;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-soft-light;
+  margin-top: $margin-xs;
+}
+
+.vertical-section#third-section form div input:focus,
+.vertical-section#third-section form div select:focus {
+  border-color: $primary-color;
+}
+
+.vertical-section#third-section form div.checkbox-container {
+  display: flex; // Flexbox für horizontale Anordnung
+  align-items: center; // Vertikales Zentrieren der Elemente
+  margin-top: $margin-md;
+  margin-bottom: $margin-md;
+}
+
+.vertical-section#third-section form div.checkbox-container label {
+  flex: 0 0 50%; // Setzt das Label auf eine feste Basis von 50% der Container-Breite
+  text-align: left; // Ausrichtung des Textes nach links
+}
+
+.vertical-section#third-section form div.checkbox-container .checkbox-input {
+  flex: 0 0 50%; // Setzt den Checkbox-Input auf eine feste Basis von 50% der Container-Breite
+  display: flex;
+  justify-content: flex-end; // Positioniert die Checkbox am rechten Rand
+  padding-right: $spacing-md; // Zusätzlicher rechter Abstand für die Checkbox
+}
+
+.vertical-section#third-section form div.checkbox-container input[type="checkbox"] {
+  position: relative; // Fügt eine relative Position hinzu, für die Positionierung von Pseudo-Elementen
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-right: 80%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $neutral-gray;
+  border-radius: $radius-xs;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:checked::after {
+    content: "✔";
+    color: $soft-black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 34px;
+  }
+}
+
+// Spezifischer Stil für den Submit-Button
+.vertical-section#third-section form div.submit-button {
+  margin: auto;
+  display: block;
+  margin-top: $margin-lg;
+  width: 60%;
+}
+
+.vertical-section#third-section form input[type="submit"],
+.vertical-section#third-section form button {
+  padding: $spacing-xs; // Erhöht den Padding für die Höhe
+  // Restliche Stile bleiben unverändert
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 90%; /* Breite auf 90% erhöht für bessere Anpassung */
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1);
+    padding: 20px;
+    width: 90%;
+    height: auto;
+    margin-bottom: 20px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .vertical-section#third-section h2 {
+    color: $primary-color;
+    font-size: 1.8rem; /* Schriftgröße leicht reduziert für bessere Lesbarkeit */
+    text-transform: uppercase;
+    text-align: center; /* Zentriert den Text horizontal */
+    margin-bottom: $spacing-sm; /* Fügt etwas Abstand unter dem H2 hinzu */
+  }
+
+  .vertical-section#third-section form {
+    background-image: url("/static/svg/gradient-primary.svg");
+    padding-bottom: $spacing-lg;
+    padding-top: $spacing-md;
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-hover-medium;
+    margin: $spacing-sm auto; /* Zentriert das Formular horizontal und fügt Abstand hinzu */
+    display: block; /* Stellt sicher, dass das Formular unter dem H2 bleibt */
+    width: 100%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    max-width: 500px; /* Beschränkt die maximale Breite des Formulars */
+  }
+
+  .vertical-section#third-section form div label {
+    font-weight: $font-weight-bold;
+    display: block;
+    margin: auto; /* Zentriert die Felder horizontal */
+    margin-left: 10%; /* Setzt den linken Abstand der Labels auf 10% */
+    margin-top: $margin-md;
+    margin-bottom: $margin-sm;
+  }
+
+  .vertical-section#third-section form div input,
+  .vertical-section#third-section form div select,
+  .vertical-section#third-section form div textarea {
+    width: 80%; /* Breite auf 80% erhöht */
+    margin: auto; /* Zentriert die Felder horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    padding: 10px; /* Padding erhöht für bessere Interaktion */
+    box-sizing: border-box; /* Schließt Padding und Border in die Breite ein */
+    -webkit-appearance: none; /* Entfernt das Standard-Browser-Styling für WebKit-Browser */
+    -moz-appearance: none; /* Entfernt das Standard-Browser-Styling für Mozilla-Browser */
+    appearance: none; /* Stellt sicher, dass das benutzerdefinierte Styling angewendet wird */
+  }
+
+  // Custom dropdown arrow styling
+  .vertical-section#third-section form div select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0l5 5 5-5H0z%22 fill=%22%23000%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 10px;
+    background-size: 13px 13px;
+    padding-right: 30px;
+  }
+
+  .vertical-section#third-section form div textarea {
+    width: 80%; /* Breite auf 80% erhöht */
+    height: 120px; /* Statische Höhe für einen Textbereich */
+    margin: auto; /* Zentriert den Textbereich horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    padding: 10px; /* Erhöht den Innenabstand */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    margin-top: $margin-xs;
+  }
+
+  .vertical-section#third-section form div input:focus,
+  .vertical-section#third-section form div select:focus {
+    border-color: $primary-color;
+  }
+
+  .vertical-section#third-section form div.checkbox-container {
+    display: flex; /* Flexbox für horizontale Anordnung */
+    align-items: center; /* Vertikales Zentrieren der Elemente */
+    margin-top: $margin-md;
+    margin-bottom: $margin-md;
+  }
+
+  .vertical-section#third-section form div.checkbox-container label {
+    flex: 0 0 50%; /* Setzt das Label auf eine feste Basis von 50% der Container-Breite */
+    text-align: left; /* Ausrichtung des Textes nach links */
+  }
+
+  .vertical-section#third-section form div.checkbox-container .checkbox-input {
+    flex: 0 0 50%; /* Setzt den Checkbox-Input auf eine feste Basis von 50% der Container-Breite */
+    display: flex;
+    justify-content: flex-end; /* Positioniert die Checkbox am rechten Rand */
+    padding-right: $spacing-md; /* Zusätzlicher rechter Abstand für die Checkbox */
+  }
+
+  .vertical-section#third-section form div input[type="checkbox"] {
+    position: relative; /* Fügt eine relative Position hinzu, für die Positionierung von Pseudo-Elementen */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 80%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:checked::after {
+      content: "✔";
+      color: $soft-black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 34px;
+    }
+  }
+
+  // Spezifischer Stil für den Submit-Button
+  .vertical-section#third-section form div.submit-button {
+    margin: auto;
+    display: block;
+    margin-top: $margin-lg;
+    width: 70%; /* Breite auf 70% erhöht */
+  }
+
+  .vertical-section#third-section form input[type="submit"],
+  .vertical-section#third-section form button {
+    padding: $spacing-xs; /* Erhöht den Padding für die Höhe */
+    // Restliche Stile bleiben unverändert
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 100%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1); /* Skalierung auf volle Höhe */
+    padding: 40px;
+    width: 100%; /* Breite auf 100% erhöht */
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+  }
+
+  .vertical-section#third-section h2 {
+    color: $primary-color;
+    font-size: 1.8rem; /* Schriftgröße leicht reduziert für bessere Lesbarkeit */
+    text-transform: uppercase;
+    text-align: center; /* Zentriert den Text horizontal */
+    margin-bottom: $spacing-sm; /* Fügt etwas Abstand unter dem H2 hinzu */
+  }
+
+  .vertical-section#third-section form {
+    background-image: url("/static/svg/gradient-primary.svg");
+    padding-bottom: $spacing-lg;
+    padding-top: $spacing-md;
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-hover-medium;
+    margin: $spacing-sm auto; /* Zentriert das Formular horizontal und fügt Abstand hinzu */
+    display: block; /* Stellt sicher, dass das Formular unter dem H2 bleibt */
+    width: 100%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    max-width: 700px; /* Beschränkt die maximale Breite des Formulars */
+  }
+
+  .vertical-section#third-section form div label {
+    font-weight: $font-weight-bold;
+    display: block;
+    margin: auto; /* Zentriert die Felder horizontal */
+    margin-left: 8%; /* Setzt den linken Abstand der Labels auf 10% */
+    margin-top: $margin-md;
+    margin-bottom: $margin-sm;
+  }
+
+  .vertical-section#third-section form div input,
+  .vertical-section#third-section form div select,
+  .vertical-section#third-section form div textarea {
+    width: 85%; /* Breite auf 85% erhöht */
+    margin: auto; /* Zentriert die Felder horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    padding: 10px; /* Padding erhöht für bessere Interaktion */
+    box-sizing: border-box; /* Schließt Padding und Border in die Breite ein */
+    -webkit-appearance: none; /* Entfernt das Standard-Browser-Styling für WebKit-Browser */
+    -moz-appearance: none; /* Entfernt das Standard-Browser-Styling für Mozilla-Browser */
+    appearance: none; /* Stellt sicher, dass das benutzerdefinierte Styling angewendet wird */
+  }
+
+  // Custom dropdown arrow styling
+  .vertical-section#third-section form div select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0l5 5 5-5H0z%22 fill=%22%23000%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 15px;
+    background-size: 13px 13px;
+    padding-right: 30px;
+  }
+
+  .vertical-section#third-section form div textarea {
+    width: 85%; /* Breite auf 85% erhöht */
+    height: 150px; /* Statische Höhe für einen Textbereich */
+    margin: auto; /* Zentriert den Textbereich horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    padding: 10px; /* Erhöht den Innenabstand */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    margin-top: $margin-xs;
+  }
+
+  .vertical-section#third-section form div input:focus,
+  .vertical-section#third-section form div select:focus {
+    border-color: $primary-color;
+  }
+
+  .vertical-section#third-section form div.checkbox-container {
+    display: flex; /* Flexbox für horizontale Anordnung */
+    align-items: center; /* Vertikales Zentrieren der Elemente */
+    margin-top: $margin-md;
+    margin-bottom: $margin-md;
+  }
+
+  .vertical-section#third-section form div.checkbox-container label {
+    flex: 0 0 50%; /* Setzt das Label auf eine feste Basis von 50% der Container-Breite */
+    text-align: left; /* Ausrichtung des Textes nach links */
+  }
+
+  .vertical-section#third-section form div.checkbox-container .checkbox-input {
+    flex: 0 0 50%; /* Setzt den Checkbox-Input auf eine feste Basis von 50% der Container-Breite */
+    display: flex;
+    justify-content: flex-end; /* Positioniert die Checkbox am rechten Rand */
+    padding-right: $spacing-md; /* Zusätzlicher rechter Abstand für die Checkbox */
+  }
+
+  .vertical-section#third-section form div input[type="checkbox"] {
+    position: relative; /* Fügt eine relative Position hinzu, für die Positionierung von Pseudo-Elementen */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 80%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:checked::after {
+      content: "✔";
+      color: $soft-black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 34px;
+    }
+  }
+
+  // Spezifischer Stil für den Submit-Button
+  .vertical-section#third-section form div.submit-button {
+    margin: auto;
+    display: block;
+    margin-top: $margin-lg;
+    width: 70%; /* Breite auf 70% erhöht */
+  }
+
+  .vertical-section#third-section form input[type="submit"],
+  .vertical-section#third-section form button {
+    padding: $spacing-xs; /* Erhöht den Padding für die Höhe */
+    // Restliche Stile bleiben unverändert
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 90%; /* Breite angepasst */
+    height: auto; /* Höhe passt sich dem Inhalt an */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+    margin-top: 150px;
+    margin-bottom: 0;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1);
+    padding: 40px; /* Reduzierte Polsterung */
+    width: 90%;
+    height: auto; /* Höhe passt sich dem Inhalt an */
+  }
+
+  .vertical-section#third-section h2 {
+    color: $primary-color;
+    font-size: 1.5rem; /* Schriftgröße reduziert für bessere Lesbarkeit auf kleineren Bildschirmen */
+    text-transform: uppercase;
+    text-align: center; /* Zentriert den Text horizontal */
+    margin-bottom: $spacing-xs; /* Fügt etwas Abstand unter dem H2 hinzu */
+  }
+
+  .vertical-section#third-section form {
+    background-image: url("/static/svg/gradient-primary.svg");
+    padding: 20px;
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-hover-medium;
+    margin: $spacing-xs auto; /* Zentriert das Formular horizontal und fügt Abstand hinzu */
+    display: block; /* Stellt sicher, dass das Formular unter dem H2 bleibt */
+    width: 100%; /* Breite auf 95% erhöht, um den Raum besser zu nutzen */
+    height: 100%;
+  }
+
+  .vertical-section#third-section form div label {
+    font-weight: $font-weight-bold;
+    display: block;
+    margin: auto; /* Zentriert die Felder horizontal */
+    margin-left: 10%; /* Setzt den linken Abstand der Labels auf 10% */
+    margin-top: $margin-sm; /* Reduzierter oberer Rand */
+    margin-bottom: $margin-xs; /* Reduzierter unterer Rand */
+  }
+
+  .vertical-section#third-section form div input,
+  .vertical-section#third-section form div select,
+  .vertical-section#third-section form div textarea {
+    width: 80%; /* Breite auf 80% erhöht */
+    margin: auto; /* Zentriert die Felder horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    padding: 8px; /* Erhöhtes Padding für bessere Interaktion */
+    box-sizing: border-box; /* Schließt Padding und Border in die Breite ein */
+    -webkit-appearance: none; /* Entfernt das Standard-Browser-Styling für WebKit-Browser */
+    -moz-appearance: none; /* Entfernt das Standard-Browser-Styling für Mozilla-Browser */
+    appearance: none; /* Stellt sicher, dass das benutzerdefinierte Styling angewendet wird */
+  }
+
+  // Custom dropdown arrow styling
+  .vertical-section#third-section form div select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0l5 5 5-5H0z%22 fill=%22%23000%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 10px;
+    background-size: 13px 13px;
+    padding-right: 25px; /* Reduzierte rechte Polsterung */
+  }
+
+  .vertical-section#third-section form div textarea {
+    width: 80%; /* Breite auf 80% erhöht */
+    height: 100px; /* Reduzierte Höhe für einen Textbereich */
+    margin: auto; /* Zentriert den Textbereich horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    padding: 8px; /* Erhöhtes Padding */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    margin-top: $margin-xs; /* Reduzierter oberer Rand */
+  }
+
+  .vertical-section#third-section form div input:focus,
+  .vertical-section#third-section form div select:focus {
+    border-color: $primary-color;
+  }
+
+  .vertical-section#third-section form div.checkbox-container {
+    display: flex; /* Flexbox für horizontale Anordnung */
+    align-items: center; /* Vertikales Zentrieren der Elemente */
+    margin-top: $margin-sm; /* Reduzierter oberer Rand */
+    margin-bottom: $margin-sm; /* Reduzierter unterer Rand */
+  }
+
+  .vertical-section#third-section form div.checkbox-container label {
+    flex: 0 0 50%; /* Setzt das Label auf eine feste Basis von 50% der Container-Breite */
+    text-align: left; /* Ausrichtung des Textes nach links */
+  }
+
+  .vertical-section#third-section form div.checkbox-container .checkbox-input {
+    flex: 0 0 50%; /* Setzt den Checkbox-Input auf eine feste Basis von 50% der Container-Breite */
+    display: flex;
+    justify-content: flex-end; /* Positioniert die Checkbox am rechten Rand */
+    padding-right: $spacing-sm; /* Reduzierte rechte Polsterung */
+  }
+
+  .vertical-section#third-section form div input[type="checkbox"] {
+    position: relative; /* Fügt eine relative Position hinzu, für die Positionierung von Pseudo-Elementen */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 70%; /* Reduzierter rechter Rand */
+    width: 18px; /* Reduzierte Breite */
+    height: 18px; /* Reduzierte Höhe */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:checked::after {
+      content: "✔";
+      color: $soft-black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px; /* Reduzierte Schriftgröße */
+    }
+  }
+
+  .vertical-section#third-section form div.submit-button {
+    margin: auto;
+    display: block;
+    margin-top: $margin-md;
+    width: 70%; /* Breite auf 70% erhöht */
+  }
+
+  .vertical-section#third-section form input[type="submit"],
+  .vertical-section#third-section form button {
+    padding: $spacing-xs; /* Erhöht den Padding für die Höhe */
+    // Restliche Stile bleiben unverändert
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 85%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    transform: scaleY(1); /* Standard auf volle Höhe gesetzt */
+    transform-origin: top;
+    overflow: hidden;
+    transition:
+      transform 0.5s ease-in-out,
+      opacity 0.5s ease-in-out;
+    opacity: 1; /* Standard-Deckkraft */
+  }
+
+  .vertical-section#third-section.active {
+    opacity: 1; /* Stelle sicher, dass die Deckkraft gesetzt ist, wenn das Element aktiv ist */
+    transform: scaleY(
+      1
+    ); /* Sicherstellen, dass keine Skalierungsanimation auftritt, wenn das Element bereits aktiv ist */
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 85%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+  }
+
+  .vertical-section#third-section.inactive {
+    opacity: 0; /* Verstecke das Element, wenn es nicht aktiv ist */
+    transform: scaleY(0);
+  }
+
+  .vertical-section#third-section h2 {
+    color: $primary-color;
+    font-size: 1.8rem; /* Schriftgröße leicht reduziert für bessere Lesbarkeit */
+    text-transform: uppercase;
+    text-align: center; /* Zentriert den Text horizontal */
+    margin-bottom: $spacing-sm; /* Fügt etwas Abstand unter dem H2 hinzu */
+  }
+
+  .vertical-section#third-section form {
+    background-image: url("/static/svg/gradient-primary.svg");
+    padding-bottom: $spacing-lg;
+    padding-top: $spacing-md;
+    border-radius: $radius-md;
+    box-shadow: $box-shadow-hover-medium;
+    margin: $spacing-sm auto; /* Zentriert das Formular horizontal und fügt Abstand hinzu */
+    display: block; /* Stellt sicher, dass das Formular unter dem H2 bleibt */
+    width: 100%; /* Breite auf 100% erhöht, um den Raum besser zu nutzen */
+    max-width: 700px; /* Beschränkt die maximale Breite des Formulars */
+  }
+
+  .vertical-section#third-section form div label {
+    font-weight: $font-weight-bold;
+    display: block;
+    margin-left: 8%; /* Setzt den linken Abstand der Labels auf 0% */
+    margin-top: $margin-md;
+    margin-bottom: $margin-sm;
+    text-align: left; /* Stellt sicher, dass der Text linksbündig ist */
+  }
+
+  .vertical-section#third-section form div input,
+  .vertical-section#third-section form div select,
+  .vertical-section#third-section form div textarea {
+    width: 85%; /* Breite auf 85% erhöht */
+    margin: auto; /* Zentriert die Felder horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    padding: 10px; /* Padding erhöht für bessere Interaktion */
+    box-sizing: border-box; /* Schließt Padding und Border in die Breite ein */
+    -webkit-appearance: none; /* Entfernt das Standard-Browser-Styling für WebKit-Browser */
+    -moz-appearance: none; /* Entfernt das Standard-Browser-Styling für Mozilla-Browser */
+    appearance: none; /* Stellt sicher, dass das benutzerdefinierte Styling angewendet wird */
+  }
+
+  // Custom dropdown arrow styling
+  .vertical-section#third-section form div select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0l5 5 5-5H0z%22 fill=%22%23000%22/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 15px;
+    background-size: 13px 13px;
+    padding-right: 30px;
+  }
+
+  .vertical-section#third-section form div textarea {
+    width: 85%; /* Breite auf 85% erhöht */
+    height: 150px; /* Statische Höhe für einen Textbereich */
+    margin: auto; /* Zentriert den Textbereich horizontal */
+    display: block; /* Ermöglicht die Anwendung von margin: auto */
+    padding: 10px; /* Erhöht den Innenabstand */
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-soft-light;
+    margin-top: $margin-xs;
+  }
+
+  .vertical-section#third-section form div input:focus,
+  .vertical-section#third-section form div select:focus {
+    border-color: $primary-color;
+  }
+
+  .vertical-section#third-section form div.checkbox-container {
+    display: flex; /* Flexbox für horizontale Anordnung */
+    align-items: center; /* Vertikales Zentrieren der Elemente */
+    margin-top: $margin-md;
+    margin-bottom: $margin-md;
+  }
+
+  .vertical-section#third-section form div.checkbox-container label {
+    flex: 0 0 50%; /* Setzt das Label auf eine feste Basis von 50% der Container-Breite */
+    text-align: left; /* Ausrichtung des Textes nach links */
+  }
+
+  .vertical-section#third-section form div.checkbox-container .checkbox-input {
+    flex: 0 0 50%; /* Setzt den Checkbox-Input auf eine feste Basis von 50% der Container-Breite */
+    display: flex;
+    justify-content: flex-end; /* Positioniert die Checkbox am rechten Rand */
+    padding-right: $spacing-md; /* Zusätzlicher rechter Abstand für die Checkbox */
+  }
+
+  .vertical-section#third-section form div input[type="checkbox"] {
+    position: relative; /* Fügt eine relative Position hinzu, für die Positionierung von Pseudo-Elementen */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 80%;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $neutral-gray;
+    border-radius: $radius-xs;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:checked::after {
+      content: "✔";
+      color: $soft-black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 34px;
+    }
+  }
+
+  // Spezifischer Stil für den Submit-Button
+  .vertical-section#third-section form div.submit-button {
+    margin: auto;
+    display: block;
+    margin-top: $margin-lg;
+    width: 70%; /* Breite auf 70% erhöht */
+  }
+
+  .vertical-section#third-section form input[type="submit"],
+  .vertical-section#third-section form button {
+    padding: $spacing-xs; /* Erhöht den Padding für die Höhe */
+    // Restliche Stile bleiben unverändert
+  }
+}

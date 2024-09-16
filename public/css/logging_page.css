@@ -1,0 +1,509 @@
+@charset "UTF-8";
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+body {
+  font-family: "Edu QLD Beginner", sans-serif;
+}
+
+h1.special-font {
+  font-family: "Dancing Script", serif;
+}
+
+p.italic-text {
+  font-style: italic;
+}
+
+h1,
+h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #007bff;
+  font-family: "Edu QLD Beginner", cursive;
+  margin-bottom: 24px;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Edu QLD Beginner", sans-serif;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #007bff;
+  font-family: "Edu QLD Beginner", cursive;
+  margin-bottom: 26px;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #0062cc;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.large {
+  font-size: 1.5rem;
+}
+
+.button {
+  font-family: "Edu QLD Beginner", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  padding: 16px 26px;
+  background-color: #b39ddb;
+  color: #ffffff;
+  border-radius: 12px;
+}
+.button:hover {
+  background-color: #9678cd;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+@font-face {
+  font-family: "Edu QLD Beginner";
+  src: url("/fonts/EduQLDBeginner-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Edu QLD Beginner";
+  src: url("/fonts/EduQLDBeginner-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Edu QLD Beginner";
+  src: url("/fonts/EduQLDBeginner-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Edu QLD Beginner";
+  src: url("/fonts/EduQLDBeginner-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Edu QLD Beginner";
+  src: url("/fonts/EduQLDBeginner-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/DancingScript-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/DancingScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/DancingScript-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/DancingScript-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/fonts/DancingScript-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+.logging-container {
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #0048b7;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  min-width: 1200px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  text-align: left;
+  border-spacing: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  table-layout: fixed; /* Ensures columns maintain their width */
+}
+
+thead th {
+  background-color: #f5f5f5;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-right: 2px solid #eaeaea;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th {
+  border: 1px solid #ddd;
+  padding: 12px;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word; /* Prevent overflow of long content */
+  white-space: normal; /* Ensure normal text flow */
+}
+
+td {
+  color: #555;
+  font-size: 0.85rem;
+  border-right: 2px solid #eaeaea;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word; /* Prevent overflow of long content */
+  padding: 10px;
+}
+
+td:last-child,
+th:last-child {
+  border-right: none;
+}
+
+/* Zeilenkanten in der jeweiligen Levelfarbe */
+tbody tr {
+  border-top: 2px solid #ccc; /* Default border color */
+  border-bottom: 2px solid #ccc; /* Default border color */
+  transition: background-color 0.3s ease;
+}
+
+/* Stil für Zeilen basierend auf Log-Level */
+tbody tr.error-log {
+  background-color: #fdecea; /* Hellerer Rotton für gesamte Zeile */
+  border-top: 2px solid #e74c3c; /* Rot für Fehler */
+  border-bottom: 2px solid #e74c3c; /* Rot für Fehler */
+}
+
+tbody tr.warning-log {
+  background-color: #fff6db; /* Hellerer Gelbton für gesamte Zeile */
+  border-top: 2px solid #f1c40f; /* Gelb für Warnung */
+  border-bottom: 2px solid #f1c40f; /* Gelb für Warnung */
+}
+
+tbody tr.info-log {
+  background-color: #eaf4fc; /* Hellerer Blauton für gesamte Zeile */
+  border-top: 2px solid #3498db; /* Blau für Info */
+  border-bottom: 2px solid #3498db; /* Blau für Info */
+}
+
+tbody tr.debug-log {
+  background-color: #f3f3f3; /* Hellerer Grauton für gesamte Zeile */
+  border-top: 2px solid #95a5a6; /* Grau für Debug */
+  border-bottom: 2px solid #95a5a6; /* Grau für Debug */
+}
+
+/* Hover-Effekte für Zeilen basierend auf Log-Level */
+tbody tr.error-log:hover {
+  background-color: #f8d7da; /* Etwas dunklerer Rotton beim Hover */
+}
+
+tbody tr.warning-log:hover {
+  background-color: #ffecb5; /* Etwas dunklerer Gelbton beim Hover */
+}
+
+tbody tr.info-log:hover {
+  background-color: #d1e7fd; /* Etwas dunklerer Blauton beim Hover */
+}
+
+tbody tr.debug-log:hover {
+  background-color: #e0e0e0; /* Etwas dunklerer Grauton beim Hover */
+}
+
+/* Stile für vorformatierten Text */
+pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+  max-height: 200px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc; /* Add a border to preformatted text */
+}
+
+details code,
+code {
+  padding: 7px;
+  padding-right: 30px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc; /* Dünne graue Umrandung */
+  border-radius: 5px;
+  display: block;
+  font-family: monospace;
+  position: relative;
+}
+
+/* Spaltenbreiten festlegen */
+th:first-child,
+td:first-child {
+  width: 3%; /* Index-Spalte */
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 11%; /* Timestamp-Spalte */
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 7%; /* Level-Spalte */
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 9%; /* Method-Spalte */
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 25%; /* Message-Spalte */
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+  width: 10%; /* User-Spalte */
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+  width: 12%; /* URL-Spalte */
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+  width: 22%; /* Anfrage-bezogene Infos */
+}
+
+th:nth-child(9),
+td:nth-child(9) {
+  width: 18%; /* Job-bezogene Infos */
+}
+
+th:nth-child(10),
+td:nth-child(10) {
+  width: 30%; /* Fehlerbezogene Infos */
+}
+
+th:nth-child(11),
+td:nth-child(11) {
+  width: 24%; /* Datenbank-bezogene Infos */
+}
+
+/* Anfrage-bezogene Infos Design */
+.anfrage-info {
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  max-height: 300px;
+  overflow: visible;
+  z-index: auto;
+}
+
+/* Styling für das klickbare summary-Element */
+.anfrage-info summary {
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  padding: 5px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Rotation des Pfeil-Symbols bei geöffnetem <details> */
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+/* Basis-Styling für das Pfeil-Symbol */
+summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Verschachtelte Details */
+.anfrage-info details details {
+  padding-left: 10px; /* Mehr Abstand für Verschachtelungen */
+  border-left: 2px solid #ddd;
+}
+
+/* Selektiere das <code> Element innerhalb der accept-language Zeile */
+.anfrage-info code,
+.anfrage-info strong {
+  margin-left: 10px; /* Füge links einen Abstand hinzu */
+}
+
+/* Header- und Session-Content Styling */
+.headers-content {
+  padding-left: 10px;
+  border-left: 2px solid #ddd;
+  overflow: hidden; /* Verhindert ungewolltes Überlaufen, aber sichtbar wenn geöffnet */
+  max-height: 0; /* Starten mit 0 Höhe */
+  transition: max-height 0.3s ease; /* Sanfte Übergänge bei Öffnen/Schließen */
+}
+
+summary {
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333; /* Standardfarbe (schwarz) */
+  padding: 5px;
+  border-radius: 3px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease, background-color 0.3s ease; /* Sanfter Übergang */
+}
+
+/* Farbe ändern, wenn das <details> geöffnet ist */
+details[open] > summary {
+  color: blue; /* Ändert die Farbe auf Blau, wenn geöffnet */
+}
+
+/* Stile für das Copy-Icon */
+.copy-icon {
+  cursor: pointer;
+  color: #007bff;
+  font-size: 1.1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 1;
+}
+
+.copy-icon:hover {
+  color: #0056b3;
+}
+
+.copied {
+  transform: scale(1.3); /* Leichte Vergrößerung */
+}
+
+.screenshot-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#screenshot-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#screenshot-button:hover {
+  background-color: #0056b3;
+}
+
+details[open] code {
+  display: block;
+}
+
+details:not([open]) code {
+  display: none;
+}
+
+.input-flash {
+  display: none; /* Initial versteckt */
+}

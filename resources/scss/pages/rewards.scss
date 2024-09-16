@@ -1,0 +1,1007 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.rewards-page {
+  html,
+  body {
+    overflow: hidden; // Verhindert das Anzeigen von Scrollbars
+    height: 100%; // Stellt sicher, dass die Höhe von html und body 100% beträgt
+    margin: 0; // Entfernt den Standardrand des Browsers
+  }
+
+  /* Intro Animation */
+  .intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  }
+
+  .intro-title {
+    font-family: Arial, sans-serif; /* Klar und gerade Schriftart */
+    display: flex;
+  }
+
+  .intro-title span {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+    font-size: 4rem; /* Basisgröße */
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInFromTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  header.interactive-header {
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed; // Ändere position auf fixed
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 0));
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .points-display h1 {
+    font-size: 2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: $neon-purple;
+  }
+
+  .points-display span {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $neon-blue;
+    animation: pointsChange 1s ease-in-out;
+  }
+
+  @keyframes pointsChange {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes spark {
+    0% {
+      opacity: 0;
+      transform: translateY(0) scale(0);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px) scale(1);
+    }
+  }
+
+  .spark {
+    position: absolute;
+    width: 10px; /* Größere Funken */
+    height: 10px; /* Größere Funken */
+    background: #ffd700;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spark 2s ease-in-out infinite;
+  }
+
+  .new-main-content {
+    padding: 0;
+    height: 100vh; // Stellt sicher, dass die Hauptinhaltsfläche die volle Höhe einnimmt
+  }
+
+  #rewards-gallery {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 1px); // Verhindert horizontale Scrollbalken
+    height: 100%;
+    padding-top: 40px;
+    background: url("/static/images/world-map.webp") no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+    margin: 0; // Sicherstellen, dass kein Margin verwendet wird
+  }
+
+  .new-reward-card {
+    position: absolute;
+    background-color: rgba(28, 28, 30, 0.9); /* Dunkler Hintergrund mit Transparenz */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Deutlichere Schattierung */
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease; /* Smooth transitions */
+    width: 160px; /* Etwas größere Breite */
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px; /* Mehr Padding für mehr Innenabstand */
+    border: 2px solid; /* Border hinzufügen */
+    border-image-slice: 1; /* Border image slice */
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c); /* Gradient für den Border */
+  }
+
+  .new-reward-card:hover {
+    transform: translateY(-10px); /* Leichte Bewegung nach oben bei Hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Deutlichere Schattierung bei Hover */
+  }
+
+  .new-reward-card img {
+    width: 80px; /* Kleinere Bildgröße */
+    height: 80px; /* Kleinere Bildgröße */
+    object-fit: cover;
+    border-radius: 50%; /* Runde Bilder */
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Schattierung für Bilder */
+  }
+
+  .new-reward-card-title {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    word-wrap: break-word;
+    white-space: normal;
+    color: #fff; /* Weißer Text */
+  }
+
+  /* Neues Design für das Belohnungs-Popup */
+  .new-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .new-popup-content {
+    background-color: #1c1c1e;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 80%; /* Reduziert die Breite */
+    max-width: 400px; /* Maximalbreite */
+    max-height: 70%; /* Reduziert die Höhe */
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Verhindert das Scrollen */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease-out;
+    border: 5px solid; /* Border hinzufügen */
+    border-image-slice: 1; /* Border image slice */
+    border-width: 3px; /* Border width */
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c); /* Gradient für den Border */
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  #new-reward-details img {
+    width: 55%;
+    height: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 200px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  #new-reward-details p {
+    margin: 1rem 0;
+  }
+
+  /* Neuer Stil für den Button */
+  #confirm-booking-btn {
+    background: linear-gradient(45deg, #e74c3c, #f39c12);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px; /* Abgerundete Ecken */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold; /* Fettschrift */
+    transition:
+      background 0.3s,
+      transform 0.3s; /* Weiche Übergänge */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Schatten für Tiefe */
+    margin-top: 1rem;
+  }
+
+  #confirm-booking-btn:hover {
+    background: linear-gradient(45deg, #f39c12, #e74c3c); /* Farbverlauf umkehren */
+    transform: scale(1.05); /* Leichtes Vergrößern beim Hover */
+  }
+
+  /* Popup Matheaufgabe */
+  #math-popup .new-popup-content,
+  #confirmation-popup .new-popup-content {
+    max-width: 300px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #math-confirmation {
+    margin-top: 20px;
+  }
+
+  #math-question {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  #math-answer {
+    padding: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+  }
+
+  #confirm-math-btn,
+  #yes-confirm-btn,
+  #no-confirm-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0 5px;
+  }
+
+  #confirm-math-btn:hover,
+  #yes-confirm-btn:hover,
+  #no-confirm-btn:hover {
+    background-color: #45a049;
+  }
+
+  #no-confirm-btn {
+    background-color: #e74c3c;
+  }
+
+  #no-confirm-btn:hover {
+    background-color: #c0392b;
+  }
+
+  /* INTRO */
+  .intro-options {
+    position: absolute;
+    bottom: 27%;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+  }
+
+  .intro-link {
+    font-family: "Dancing Script", cursive;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #333;
+    transition:
+      color 0.2s,
+      transform 0.2s;
+    font-weight: bolder;
+  }
+
+  .intro-link:hover {
+    color: #666;
+    transform: scale(1.2);
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  // Popup Container
+  #rewards-received-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    &.hidden {
+      display: none;
+    }
+  }
+
+  // Popup Content
+  .new-received-popup-content {
+    background-color: #1c1c1e;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease-out;
+    border: 5px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c);
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    // Table Styles
+    #rewards-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #333;
+        color: #fff;
+        font-size: 1rem;
+      }
+
+      tr:nth-child(even) {
+        background-color: #2c2c2e;
+      }
+
+      tr:hover {
+        background-color: #444;
+      }
+
+      td {
+        font-size: 0.9rem;
+        color: #fff;
+      }
+    }
+  }
+
+  // Slide In Animation
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  // Close Button
+  .new-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      color: #f39c12;
+    }
+  }
+
+  .view-rewards-btn {
+    background-color: rgba(28, 28, 30, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c);
+    margin-right: 50px;
+    color: white;
+  }
+
+  .view-rewards-btn:hover {
+    transform: translateY(-2px); /* Leichte Bewegung nach oben bei Hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Deutlichere Schattierung bei Hover */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  html,
+  body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Zentrierung und Anpassung der Intro-Animation */
+  .intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .intro-title span {
+    font-size: 3rem; /* Verkleinerte Schriftgröße für das iPad 8th Gen */
+  }
+
+  .intro-options {
+    justify-content: center; /* Zentrierung */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Verkleinerung der Link-Schriftgröße */
+  .intro-link {
+    font-size: 1.5rem !important; /* Kleinere Schriftgröße für die Links */
+  }
+
+  /* Verhindert Scrollen im Hauptinhalt */
+  .new-main-content {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Verhindern von horizontalem Scrollen */
+  #rewards-gallery {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Anpassungen für die Karten */
+  .rewards-page .new-reward-card {
+    width: 140px; /* Anpassung der Breite */
+    height: 140px; /* Anpassung der Höhe */
+    padding: 12px; /* Weniger Innenabstand */
+  }
+
+  .rewards-page .new-reward-card img {
+    width: 70px; /* Anpassung der Bildgröße */
+    height: 70px; /* Anpassung der Bildgröße */
+  }
+
+  .rewards-page .new-reward-card-title {
+    font-size: 1rem; /* Kleinere Schriftgröße für den Titel */
+  }
+
+  /* Anpassungen für das Popup */
+  .rewards-page .new-popup-content {
+    padding: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    h2 {
+      font-size: 1.5rem; /* Verkleinerte Schriftgröße */
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    #reward-image {
+      width: 55%; /* Bildgröße auf 55% reduziert */
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    #new-reward-description {
+      font-size: 0.9rem; /* Kleinere Schriftgröße für die Beschreibung */
+      margin-top: 0.5rem;
+      color: #666;
+      text-align: center;
+    }
+
+    #confirm-booking-btn {
+      background: linear-gradient(45deg, #e74c3c, #f39c12);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem; /* Verkleinerte Polsterung */
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem; /* Kleinere Schriftgröße */
+      font-weight: bold;
+      transition:
+        background 0.3s,
+        transform 0.3s; /* Weiche Übergänge */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Schatten für Tiefe */
+      margin-top: 1rem;
+    }
+
+    #confirm-booking-btn:hover {
+      background: linear-gradient(45deg, #f39c12, #e74c3c);
+      transform: scale(1.05); /* Leichtes Vergrößern beim Hover */
+    }
+  }
+
+  /* Anpassungen für die Punkte-Anzeige */
+  .rewards-page .points-display h1 {
+    font-size: 2rem; /* Verkleinerte Schriftgröße */
+  }
+
+  .rewards-page .points-display span {
+    font-size: 2rem; /* Verkleinerte Schriftgröße */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+  html,
+  body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Zentrierung und Anpassung der Intro-Animation */
+  .intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .intro-title span {
+    font-size: 3rem; /* Verkleinerte Schriftgröße für das iPad 8th Gen im Querformat */
+  }
+
+  .intro-options {
+    justify-content: center; /* Zentrierung */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Verkleinerung der Link-Schriftgröße */
+  .intro-link {
+    font-size: 1.5rem !important; /* Kleinere Schriftgröße für die Links */
+  }
+
+  /* Verhindert Scrollen im Hauptinhalt */
+  .new-main-content {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Verhindern von horizontalem Scrollen */
+  #rewards-gallery {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Anpassungen für die Karten */
+  .rewards-page .new-reward-card {
+    width: 140px; /* Anpassung der Breite */
+    height: 140px; /* Anpassung der Höhe */
+    padding: 15px; /* Weniger Innenabstand */
+  }
+
+  .rewards-page .new-reward-card img {
+    width: 80px; /* Anpassung der Bildgröße */
+    height: 80px; /* Anpassung der Bildgröße */
+  }
+
+  .rewards-page .new-reward-card-title {
+    font-size: 1.0rem; /* Kleinere Schriftgröße für den Titel */
+  }
+
+  /* Anpassungen für das Popup */
+  .rewards-page .new-popup-content {
+    padding: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    h2 {
+      font-size: 1.5rem; /* Verkleinerte Schriftgröße */
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    #reward-image {
+      width: 55%; /* Bildgröße auf 55% reduziert */
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    #new-reward-description {
+      font-size: 0.9rem; /* Kleinere Schriftgröße für die Beschreibung */
+      margin-top: 0.5rem;
+      color: #666;
+      text-align: center;
+    }
+
+    #confirm-booking-btn {
+      background: linear-gradient(45deg, #e74c3c, #f39c12);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem; /* Verkleinerte Polsterung */
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem; /* Kleinere Schriftgröße */
+      font-weight: bold;
+      transition:
+        background 0.3s,
+        transform 0.3s; /* Weiche Übergänge */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Schatten für Tiefe */
+      margin-top: 1rem;
+    }
+
+    #confirm-booking-btn:hover {
+      background: linear-gradient(45deg, #f39c12, #e74c3c);
+      transform: scale(1.05); /* Leichtes Vergrößern beim Hover */
+    }
+  }
+
+  /* Anpassungen für die Punkte-Anzeige */
+  .rewards-page .points-display h1 {
+    font-size: 2rem; /* Verkleinerte Schriftgröße */
+  }
+
+  .rewards-page .points-display span {
+    font-size: 2rem; /* Verkleinerte Schriftgröße */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  /* Sicherstellen, dass kein Scrollen möglich ist */
+  html,
+  body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Zentrierung und Anpassung der Intro-Animation */
+  .intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .intro-options {
+    justify-content: center; /* Zentrierung */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Verkleinerung der Link-Schriftgröße */
+  .intro-link {
+    font-size: 1rem !important;
+  }
+
+  /* Verhindert Scrollen im Hauptinhalt */
+  .new-main-content {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Verhindern von horizontalem Scrollen */
+  #rewards-gallery {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .rewards-page .view-rewards-btn {
+    background-color: rgba(28, 28, 30, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c);
+    margin-right: 30px;
+    color: white;
+  }
+
+  .rewards-page .points-display h1 {
+    font-size: 1.5rem;
+  }
+
+  .rewards-page .points-display span {
+    font-size: 1.5rem;
+  }
+
+  .rewards-page .new-reward-card {
+    width: 120px; /* Kleinere Breite */
+    height: 120px;
+    padding: 10px; /* Weniger Innenabstand */
+  }
+
+  .rewards-page .new-reward-card img {
+    width: 70px; /* Kleinere Bildgröße */
+    height: 70px; /* Kleinere Bildgröße */
+  }
+
+  .rewards-page .new-reward-card-title {
+    font-size: 0.8rem; /* Kleinere Schriftgröße für den Titel */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  html,
+  body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Zentrierung und Anpassung der Intro-Animation */
+  .intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Verhindert Scrollen */
+  }
+
+  /* Anpassung der Intro-Optionen */
+  .intro-options {
+    justify-content: center; /* Zentrierung */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Verkleinerung der Link-Schriftgröße */
+  .intro-link {
+    font-size: 1rem !important;
+  }
+
+  /* Sicherstellen, dass die Hauptinhaltsfläche die volle Höhe einnimmt */
+  .new-main-content {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Verhindern von horizontalem und vertikalem Scrollen in der Galerie */
+  #rewards-gallery {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Anpassungen für Karten */
+  .rewards-page .new-reward-card {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    padding-top: 20px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .rewards-page .new-reward-card img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .rewards-page .new-reward-card-title {
+    font-size: 0.9rem;
+  }
+
+  .rewards-page .view-rewards-btn {
+    background-color: rgba(28, 28, 30, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #f39c12, #e74c3c);
+    margin-right: 30px;
+    color: white;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Hover- und Active-Effekte */
+  .rewards-page .new-reward-card:hover,
+  .rewards-page .new-reward-card:active {
+    transform: translateY(-10px); /* Leichte Bewegung nach oben */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .rewards-page .view-rewards-btn:hover,
+  .rewards-page .view-rewards-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Popup-Anpassungen */
+  .rewards-page .new-popup-content {
+    padding: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    #reward-image {
+      width: 50%;
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    #new-reward-description {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #666;
+      text-align: center;
+    }
+
+    #confirm-booking-btn {
+      background: linear-gradient(45deg, #e74c3c, #f39c12);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition:
+        background 0.3s,
+        transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 1rem;
+    }
+
+    #confirm-booking-btn:hover,
+    #confirm-booking-btn:active {
+      background: linear-gradient(45deg, #f39c12, #e74c3c);
+      transform: scale(1.05);
+    }
+  }
+}

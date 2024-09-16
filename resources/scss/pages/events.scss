@@ -1,0 +1,134 @@
+// resources\scss\pages\events.scss
+@import "../base/variables";
+@import "../base/mixins";
+@import "../base/typography";
+@import "../base/fonts";
+
+.filter-events-container {
+  padding: 40px;
+  border-radius: $radius-md;
+  margin: 3rem;
+  width: 80%;
+  box-shadow: $box-shadow-soft-strong;
+  text-align: center;
+
+  // Verwende & { }, um die neuen Sass-Regeln zu akzeptieren
+  & {
+    @include glass-effect($light-blue);
+  }
+}
+
+.filter-wrapper.events-wrapper {
+  margin-bottom: 2rem;
+
+  h1 {
+    color: $primary-color;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .filter-section {
+    display: flex;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+      font-weight: bold;
+      margin: 0.5rem;
+      text-align: center;
+    }
+
+    select {
+      width: 30%;
+      padding: 10px;
+      margin: 0.5rem;
+      border-radius: $radius-md;
+      border: 1px solid $primary-color;
+      background-image: url($arrow-icon);
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      appearance: none;
+
+      &:hover,
+      &:focus {
+        background-color: darken($primary-color, 10%);
+        box-shadow: 0 0 10px $neon-pink, 0 0 20px $neon-pink;
+        transform: translateY(-2px);
+
+        // Neue Regeln in & { } umschließen
+        & {
+          transition: background-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+        }
+      }
+
+      &:active {
+        background-color: darken($primary-color, 20%);
+        box-shadow: 0 0 5px $neon-pink, 0 0 10px $neon-pink;
+        transform: translateY(1px);
+      }
+    }
+  }
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid $primary-color;
+  }
+
+  th {
+    background-color: lighten($light-blue, 10%);
+  }
+
+  tbody tr:hover {
+    background-color: $white-color;
+
+    // Neon-Glow Effekt in & { } umschließen
+    & {
+      @include neon-glow($primary-color);
+    }
+  }
+}
+
+#flash-messages {
+  padding: 10px;
+  margin-top: 1rem;
+  background: lighten($light-blue, 20%);
+  border-radius: $radius-md;
+  text-align: center;
+}
+
+.delete-event {
+  padding: 10px 20px;
+  background-color: $warning-red;
+  color: $white-color;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($warning-red, 10%);
+    box-shadow: 0 0 10px $neon-pink, 0 0 20px $neon-pink;
+    transform: translateY(-2px);
+
+    // Hover-Regel in & { } umschließen
+    & {
+      transition: background-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+    }
+  }
+
+  &:active {
+    background-color: darken($warning-red, 20%);
+    box-shadow: 0 0 5px $neon-pink, 0 0 10px $neon-pink;
+    transform: translateY(1px);
+  }
+}

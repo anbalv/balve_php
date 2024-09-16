@@ -1,0 +1,110 @@
+// fabalve\static\scss\base\typography.scss
+@import "_variables";
+
+body {
+  font-family: "Edu QLD Beginner", sans-serif;
+}
+
+// Spezifische Stile für andere Elemente
+h1.special-font {
+  font-family: "Dancing Script", serif;
+}
+
+p.italic-text {
+  font-style: italic;
+}
+
+// Allgemeine Stile für alle Überschriften
+h1,
+h2 {
+  font-size: $font-size-xl;
+  text-align: center;
+  color: #007bff;
+  font-family: "Edu QLD Beginner", cursive; // Überschreibt die allgemeine Schriftart
+  margin-bottom: $margin-lg;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Edu QLD Beginner", sans-serif;
+  font-weight: $font-weight-bold; // Nutzung von fett für alle Überschriften
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+// Spezifische Stile für h1 bis h6
+h1 {
+  font-size: $font-size-xxl;
+}
+
+h2 {
+  font-size: $font-size-xl;
+  text-align: center;
+  color: #007bff;
+  font-family: "Edu QLD Beginner", cursive; // Überschreibt die allgemeine Schriftart
+  margin-bottom: 26px;
+}
+
+h3 {
+  font-size: $font-size-lg;
+}
+
+h4 {
+  font-size: $font-size-md;
+}
+
+h5 {
+  font-size: $font-size-sm;
+}
+
+h6 {
+  font-size: $font-size-xs;
+}
+
+// Link styles
+a {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: $primary-color-dark;
+  }
+}
+
+// Small and large text classes
+.small {
+  font-size: $font-size-xs;
+}
+.large {
+  font-size: $font-size-lg;
+}
+
+// Button styles
+.button {
+  font-family: "Edu QLD Beginner", sans-serif;
+  font-weight: $font-weight-medium;
+  text-align: center;
+  padding: $spacing-sm $spacing-md;
+  background-color: $accent-color;
+  color: $white-color;
+  border-radius: $radius-md;
+  &:hover {
+    background-color: $accent-color-dark;
+  }
+}
+
+// Text alignment utilities
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-justify {
+  text-align: justify;
+}

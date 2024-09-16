@@ -1,0 +1,870 @@
+@import "../base/variables";
+@import "../base/mixins";
+@import "../base/typography";
+@import "../base/fonts";
+
+.tagesansicht-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; // Verhindert horizontalen Scrollbalken
+}
+
+.top-bar {
+  display: flex;
+  justify-content: center; /* Zentriert den Inhalt horizontal */
+  align-items: center;
+  width: 100%;
+  position: relative; /* Erlaubt absolute Positionierung der Buttons */
+}
+
+.back-button-container,
+.button-container {
+  width: 150px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.back-button-container {
+  left: 0; /* Positioniert den Zurück-Button links */
+}
+
+.button-container {
+  right: 0; /* Positioniert den Platzhalter rechts */
+}
+
+.tagesansicht-title-container {
+  text-align: center;
+  flex-grow: 1; /* Lässt den Titelcontainer den restlichen Platz einnehmen */
+}
+
+.tagesansicht-text {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+  margin: 0;
+}
+
+.btn-primary {
+  color: $white-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  font-weight: $font-weight-bold;
+  font-size: 1.1rem;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-xs;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast,
+    border-color $transition-fast,
+    transform $transition-fast;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid transparent;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $secondary-color-dark;
+    background-color: $primary-color-dark;
+    border-color: $primary-color-dark;
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    background-color: $primary-color-saturated;
+    border-color: $primary-color-saturated;
+  }
+
+  &:disabled {
+    background-color: $neutral-gray;
+    border-color: $neutral-gray;
+    cursor: not-allowed;
+    color: $soft-black;
+  }
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: $primary-color-dark;
+}
+
+.btn-placeholder {
+  display: inline-block;
+  padding: $spacing-xs $spacing-md;
+  font-size: 1.1rem;
+  border-radius: $radius-xs;
+  width: calc(100% - 2 * $spacing-md);
+  height: 2rem;
+  margin: $spacing-sm;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.tagesansicht-innen-container {
+  display: flex;
+  flex-direction: row; /* Setzt die Ausrichtung der Kinder-Elemente auf horizontal */
+  width: 100%; /* Verhindert horizontalen Scrollbalken */
+  margin: 0;
+  padding: 20px;
+  justify-content: space-between; /* Optional: Verteilt die Container mit Abstand zwischen ihnen */
+}
+
+.left-container {
+  flex: 0 0 40%; /* Setzt die Breite des Containers auf 30% */
+  margin: 0;
+  padding: 0;
+  background-color: $white-color;
+  color: $dark-color;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-focused-medium;
+  display: flex; /* Aktiviert Flexbox */
+  justify-content: center; /* Zentriert den Inhalt horizontal */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+  text-align: center; /* Zentriert den Text innerhalb des Elements */
+}
+
+.left-middle-container {
+  flex: 0 0 30%; /* Setzt die Breite des Containers auf 30% */
+  display: flex;
+  flex-direction: column; /* Richtet die Kinder-Elemente vertikal aus */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.middle-left-container {
+  flex: 0 0 35%; /* Nimmt 35% der Höhe ein */
+  margin: 20px;
+  padding: 0;
+  display: flex;
+  position: relative; /* Macht diesen Container zu einem Bezugspunkt für absolute Positionierung */
+}
+
+.middle-right-container {
+  flex: 0 0 65%; /* Nimmt 65% der Höhe ein */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Zentriert den Inhalt horizontal */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+}
+
+.right-middle-container {
+  flex: 0 0 30%; /* Setzt die Breite des Containers auf 30% */
+  display: flex;
+  flex-direction: column; /* Richtet die Kinder-Elemente vertikal aus */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.h3-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url("/static/svg/gradient-primary.svg");
+  color: #ffffff;
+  padding: 12px 12px 0px 12px;
+  text-align: center;
+  transition: background-color 0.5s;
+  border: 2px solid #f8f9fa;
+  margin-top: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    background-image: url("/static/svg/gradient-primary-hover.svg");
+  }
+}
+
+.time-highlight {
+  font-weight: $font-weight-bold;
+  color: $success-green;
+  font-size: $font-size-xs;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xs;
+  padding: 0;
+}
+
+.label {
+  font-weight: $font-weight-bold;
+  color: $dark-color;
+  text-transform: uppercase;
+  font-size: $font-size-xs;
+}
+
+.value {
+  padding: 5px;
+  background-color: $background-color;
+  border-radius: $radius-xs;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+  font-size: $font-size-xs;
+}
+
+.no-document {
+  color: $warning-red;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: baseline;
+  color: black;
+
+  .info-row {
+    display: flex;
+    justify-content: flex-start; // Stellt sicher, dass die Inhalte linksbündig sind
+    align-items: center; // Zentriert den Text vertikal innerhalb der Zeile
+  }
+
+  .label {
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    padding: 5px;
+    background-color: $background-color;
+    border-radius: $radius-xs;
+    text-align: left; // Text im Label linksbündig ausrichten
+    margin-right: 15px; // Fügt einen Abstand zwischen Label und Uhrzeit hinzu
+    min-width: 80px; // Stellt sicher, dass die Labels eine konstante Breite haben
+  }
+
+  .value {
+    font-weight: $font-weight-bold;
+    background-color: $background-color;
+    border-radius: $radius-xs;
+    text-align: left; // Text für die Uhrzeit linksbündig ausrichten
+  }
+}
+
+.status-abgelaufen,
+.status-geprueft,
+.status-warten {
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: $white-color;
+
+  &.status-abgelaufen {
+    background-image: url("/static/svg/status-abgelaufen.svg");
+  }
+
+  &.status-geprueft {
+    background-image: url("/static/svg/status-geprueft.svg");
+  }
+
+  &.status-warten {
+    background-image: url("/static/svg/status-warten.svg");
+    animation: blinkAnimation 2s infinite;
+    filter: brightness(1.1) saturate(1.2);
+  }
+}
+
+@keyframes blinkAnimation {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.card {
+  position: relative;
+  transition:
+    transform $transition-normal ease-in-out,
+    top $transition-normal ease-in-out;
+  transform: scale(1);
+  box-shadow: $box-shadow-soft-light;
+
+  &.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    max-height: 90vh;
+    width: 40%;
+    z-index: 1000;
+    box-shadow: $box-shadow-deep-medium;
+    transition:
+      transform $transition-slow ease-in-out,
+      top $transition-slow ease-in-out;
+  }
+
+  &.pre-active {
+    transition: none;
+  }
+}
+
+.card-header {
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    box-shadow $transition-fast;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $border-color-primary-hover;
+  margin-top: $spacing-xs;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-soft-light;
+  background-color: $light-color;
+
+  &:hover {
+    background-image: url("/static/svg/secondary-color.svg");
+    border-color: $border-color-primary-hover;
+    color: black;
+  }
+
+  .rotate-icon {
+    font-size: 1.5em;
+    margin-left: auto;
+    color: $accent-color;
+
+    &[aria-expanded="true"] {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.collapse {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 1.5s ease-out,
+    opacity 1.5s ease-out;
+
+  &[aria-expanded="true"] {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+.card-body {
+  padding: $spacing-xs $spacing-md;
+  background-color: $white-color;
+  border: 1px solid $light-color;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-soft-light;
+  font-size: $font-size-xs;
+  transition: opacity 1.5s ease-out;
+  text-align: left;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+
+  h3 {
+    margin-right: $spacing-sm;
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  .tagesansicht-container {
+    padding: 0; /* Setzt das Padding auf 0 */
+    margin: 0; /* Setzt das Margin auf 0 */
+    max-width: 100%; /* Nutzt die volle Breite */
+    box-sizing: border-box;
+  }
+
+  .tagesansicht-text {
+    font-size: $font-size-xl; // Verkleinert die Schriftgröße für bessere Lesbarkeit
+  }
+
+  .top-bar,
+  .back-button-container,
+  .button-container {
+    padding: 5px 0; // Reduziert den Padding, um mehr Inhalte sichtbar zu machen
+  }
+
+  .btn-primary,
+  .btn-link,
+  .btn-placeholder {
+    font-size: 1rem; // Reduziert die Schriftgröße der Buttons
+  }
+
+  .tagesansicht-innen-container {
+    flex-direction: column;
+    padding: 0;
+    margin: 5px auto;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .left-container,
+  .left-middle-container,
+  .right-middle-container {
+    flex: 1 0 100%; // Stellt sicher, dass jedes Element die volle verfügbare Breite nutzt
+    margin-bottom: 0; // Fügt einen unteren Abstand für Trennung hinzu
+    height: auto;
+  }
+
+  .left-container {
+    display: none;
+  }
+
+  .right-middle-container {
+    padding: 35px;
+    margin: 5px auto;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
+  }
+
+  .middle-left-container {
+    flex-direction: column; // Verändert die Ausrichtung zu vertikal für eine bessere Darstellung
+    margin: 0;
+    height: 100%;
+  }
+
+  .middle-right-container {
+    flex-direction: column; // Beibehaltung der vertikalen Ausrichtung
+    margin: 0; // Bestätigung, dass kein externer Abstand vorhanden ist
+    height: auto; // Anpassung der Höhe, um nur den benötigten Platz zu verwenden
+    margin-top: 0; // Entfernt oberen Abstand für alle direkten Kinder
+    margin-bottom: 0; // Entfernt unteren Abstand für alle direkten Kinder
+    padding: 5px 0; // Minimales Padding für Innenabstände
+  }
+
+  // Spezielle Anpassungen für Elemente innerhalb des .middle-right-container, falls notwendig
+  .some-specific-class {
+    padding: 5px; // Beispiel für eine spezifische Klasse, die angepasst werden könnte
+  }
+
+  .h3-container,
+  .card-header {
+    font-size: $font-size-sm; // Reduziert die Schriftgröße in Überschriften für eine bessere Anpassung
+  }
+
+  .card {
+    width: 100%; // Erweitert die Karte auf die volle Breite, um den Platz optimal zu nutzen
+    margin-bottom: 10px; // Fügt Abstand zwischen den Karten hinzu
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr; // Ändert die Grid-Spalten zu einer einzigen Spalte
+  }
+
+  .entry {
+    flex-direction: column; // Ändert die Ausrichtung von flexiblen Elementen zu vertikal
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Stellt sicher, dass Padding und Border in der Elementbreite enthalten sind */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 0px) and (max-width: 1080px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .tagesansicht-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Verhindert horizontalen Scrollbalken */
+  }
+
+  .tagesansicht-innen-container {
+    display: flex;
+    flex-direction: row; /* Setzt die Ausrichtung der Kinder-Elemente auf horizontal */
+    flex-wrap: wrap; /* Erlaubt das Umbrechen in eine neue Zeile */
+    width: 100%; /* Verhindert horizontalen Scrollbalken */
+    margin: 0;
+    padding: 20px;
+    justify-content: space-between; /* Verteilt die Container mit gleichem Abstand zwischen ihnen */
+  }
+
+  .left-middle-container {
+    order: 1; /* Setzt den left-middle-container an die erste Position */
+    flex: 0 0 100%; /* Breite auf 100% setzen, um einen Umbruch zu erzwingen */
+    display: flex;
+    flex-direction: row; /* Richtet den Inhalt innerhalb des Containers horizontal aus */
+    justify-content: space-between; /* Verteilt den Inhalt gleichmäßig horizontal */
+    margin-bottom: 20px; /* Fügt Abstand nach unten hinzu, um die neue Reihe zu trennen */
+    height: auto; /* Höhe deutlich reduziert */
+  }
+
+  /* Styling für middle-left-container und middle-right-container innerhalb des left-middle-container */
+  .middle-left-container,
+  .middle-right-container {
+    flex: 0 0 49%; /* Jeder Container nimmt 49% der Breite ein, um Platz für beide Container zu lassen */
+    margin: 0;
+    padding: 10px; /* Etwas Padding für Innenabstände */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    box-shadow: $box-shadow-soft-light;
+    border-radius: $radius-xs;
+    height: 100%; /* Setzt die Höhe auf 100% des übergeordneten Containers */
+  }
+
+  /* Falls zusätzlicher Abstand zwischen den beiden Containern erforderlich ist */
+  .middle-left-container {
+    margin-right: 2%; /* Fügt einen kleinen Abstand zwischen den Containern hinzu */
+  }
+
+  .left-container {
+    order: 2; /* Setzt den left-container an die zweite Position */
+    flex: 0 0 49%; /* Breite auf 49% setzen, damit zwei Container in die neue Reihe passen */
+    margin-right: 2%; /* Abstand rechts für den zweiten Container */
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    display: flex; /* Aktiviert Flexbox */
+    justify-content: center; /* Zentriert den Inhalt horizontal */
+    align-items: center; /* Zentriert den Inhalt vertikal */
+    text-align: center; /* Zentriert den Text innerhalb des Elements */
+    height: 500px; /* Höhe wurde erheblich reduziert */
+  }
+
+  .right-middle-container {
+    order: 3;
+    flex: 0 0 49%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .tagesansicht-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Verhindert horizontalen Scrollbalken */
+  }
+
+  .tagesansicht-innen-container {
+    display: flex;
+    flex-direction: column; /* Ändert die Ausrichtung auf vertikal */
+    width: 100%; /* Verhindert horizontalen Scrollbalken */
+    margin: 0;
+    padding: 10px; /* Verkleinert die Polsterung */
+    height: 700px;
+  }
+
+  .left-middle-container {
+    order: 1;
+    flex: 0 0 100%; /* Breite auf 100% */
+    display: flex;
+    flex-direction: column; /* Richtet den Inhalt vertikal aus, damit middle-left und middle-right untereinander sind */
+    justify-content: space-between;
+    margin: 0; /* Fügt Abstand nach unten hinzu */
+    padding: 0;
+    height: 2000px; /* Höhe passt sich dem Inhalt an */
+  }
+
+  .middle-left-container {
+    flex: 0 0 100%;
+    margin-top: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    max-height: 400px;
+  }
+
+  .middle-right-container {
+    flex: 0 0 100%; /* Setzt die Breite auf 100%, damit sie untereinander erscheinen */
+    margin-top: 100px; /* Entfernt den Abstand zwischen den Containern und fügt unten Abstand hinzu */
+    padding: 0; /* Verringert die Polsterung */
+    display: flex;
+    flex-direction: column; /* Richtet den Inhalt vertikal aus */
+    box-shadow: $box-shadow-soft-light;
+    border-radius: $radius-xs;
+    max-height: 800px; /* Höhe passt sich dem Inhalt an */
+    margin-bottom: 0;
+  }
+
+  .left-container {
+    order: 2;
+    flex: 0 0 100%;
+    margin-top: 350px;
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: #ffffff;
+    color: #343a40;
+    border-radius: 4px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-height: 300px;
+  }
+
+  .right-middle-container {
+    order: 3;
+    flex: 0 0 100%; /* Setzt die Breite auf 100% */
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  .back-button-container,
+  .button-container {
+    width: 120px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .back-button-container {
+    left: 0;
+  }
+
+  .button-container {
+    right: 0;
+  }
+
+  .tagesansicht-title-container {
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .tagesansicht-text {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin: 0;
+  }
+
+  .btn-primary,
+  .btn-placeholder {
+    font-size: 1rem;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-xs;
+    width: calc(100% - 2 * $spacing-sm);
+    height: 1.8rem;
+  }
+}
+
+.h3-container {
+  font-size: $font-size-md; /* Verkleinert die Schriftgröße */
+  padding: 10px; /* Verkleinert die Polsterung */
+  margin-top: 5px; /* Verkleinert den oberen Rand */
+}
+
+.info-grid {
+  grid-template-columns: 1fr; /* Ändert die Grid-Spalten zu einer einzigen Spalte */
+  gap: 5px; /* Verkleinert den Abstand zwischen den Feldern */
+}
+
+.card-header {
+  padding: 6px 10px; /* Verkleinert die Polsterung */
+}
+
+.card-body {
+  padding: 10px; /* Verkleinert die Polsterung */
+}
+
+.private-tasks-accordion {
+  margin-bottom: 50px;
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins";
+  @import "../base/typography";
+  @import "../base/fonts";
+
+  .tagesansicht-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; // Nutzt den gesamten vertikalen Raum
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .tagesansicht-innen-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    justify-content: space-between;
+    flex-grow: 1; // Lässt das Innen-Container den verbleibenden Platz einnehmen
+  }
+
+  .left-middle-container {
+    order: 1;
+    flex: 0 0 49%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 0;
+    width: 100%;
+  }
+
+  .middle-left-container,
+  .middle-right-container {
+    flex: 0 0 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: $box-shadow-soft-light;
+    border-radius: $radius-xs;
+    margin: 0;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .middle-left-container {
+    margin-right: 2%;
+    align-items: center;
+  }
+
+  .middle-right-container {
+    align-items: flex-start;
+  }
+
+  .left-container {
+    order: 2;
+    flex: 0 0 49%;
+    margin-right: 2%;
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 300px; // Reduziert die Höhe für bessere Sichtbarkeit
+  }
+
+  .right-middle-container {
+    order: 3;
+    flex: 0 0 49%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: auto;
+  }
+
+  .accordion-container {
+    width: 100%;
+  }
+
+  .task-tasks-accordion,
+  .private-tasks-accordion {
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .h3-container {
+    padding: 8px;
+    text-align: center;
+    background-image: url("/static/svg/gradient-primary.svg");
+    color: #ffffff;
+    border-radius: 4px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .card-header {
+    padding: 8px;
+    font-size: $font-size-sm;
+  }
+
+  .card-body {
+    padding: 10px;
+    font-size: $font-size-xs;
+  }
+
+  .label {
+    font-size: $font-size-xs;
+  }
+
+  .value {
+    font-size: $font-size-xs;
+  }
+}

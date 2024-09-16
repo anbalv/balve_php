@@ -1,0 +1,206 @@
+// _variables.scss
+// Farbvariablen
+$primary-color: #007bff;
+$primary-color-light: lighten($primary-color, 10%);
+$primary-color-dark: darken($primary-color, 10%);
+$primary-color-saturated: saturate($primary-color, 20%);
+$primary-color-desaturated: desaturate($primary-color, 20%);
+
+$secondary-color: #ffd700;
+$secondary-color-light: lighten($secondary-color, 25%);
+$secondary-color-dark: darken($secondary-color, 10%);
+$secondary-color-saturated: saturate($secondary-color, 20%);
+$secondary-color-desaturated: desaturate($secondary-color, 20%);
+
+$accent-color: #b39ddb;
+$accent-color-light: lighten($accent-color, 10%);
+$accent-color-dark: darken($accent-color, 10%);
+$accent-color-saturated: saturate($accent-color, 20%);
+$accent-color-desaturated: desaturate($accent-color, 20%);
+
+// Basisfarben
+$white-color: #ffffff; // Reines Weiß, ideal für Hintergründe und für Kontrast zu dunkleren Farben.
+$dark-color: #343a40; // Dunkles Grau, nützlich für Text und schwere Elemente.
+$light-color: #f8f9fa; // Sehr helles Grau, fast Weiß, gut für Hintergrundfarben, um subtile Unterschiede zu schaffen.
+// Ergänzende Neutral- und Kontrastfarben
+$neutral-gray: #9e9e9e; // Mittelgrau, universell einsetzbar für Schriften und UI-Elemente, die weniger Aufmerksamkeit erfordern.
+$soft-black: #222222; // Weiches Schwarz, bietet einen weniger harten Kontrast als reines Schwarz, ideal für Texte und Überschriften.
+$off-white: #f0f0f0; // Abgeschwächtes Weiß, ideal für Flächen, die nicht blendend weiß sein sollen, aber dennoch hell wirken.
+// Unterstützende Akzentfarben
+$complementary-blue: #33a1fd; // Ein helleres Blau als $primary-color, gut für Info-Buttons oder Links.
+$warning-red: #ff4136; // Signalfarbe für Warnungen oder Fehler, auffällig und klar erkennbar.
+$success-green: #2ecc40; // Grün für Erfolgsmeldungen, bestätigt positive Aktionen oder Zustände.
+// Sanfte Akzente
+$soft-purple: #a88bdd; // Eine weichere Variante von $accent-color, geeignet für nicht dominante Akzente.
+$soft-yellow: #ffc107; // Helles, sanftes Gelb, verwendet für Hinweise oder hervorzuhebende Notizen.
+
+// Neon-Farben
+$neon-green: #39ff14; // Helles Grün, oft in Neon-Schildern verwendet
+$neon-pink: #ff6ec7; // Lebhaftes Pink, auffällig und modern
+$neon-blue: #00c8ff; // Helles Blau, erinnert an Neonlichter
+$neon-yellow: #ccff00; // Strahlendes Gelb, sehr leuchtend
+$neon-orange: #ff5f1f; // Helles Orange, stark und energetisch
+$neon-purple: #e200ff; // Leuchtendes Lila, auffallend und kraftvoll
+$neon-red: #ff073a; // Neon Rot
+
+$gradient-custom: linear-gradient(
+    to right,
+    $primary-color,
+    $secondary-color,
+    $accent-color
+);
+$border-color-primary-hover: #005bb5; // Ein etwas dunkleres Blau als der hellste Farbton im Gradient
+
+// Transparents des Hintergrundes
+$background-color: rgba(
+    242,
+    244,
+    246,
+    0
+); // Transparenter Hintergrund, vielseitig einsetzbar.
+$background-color-light: rgba(
+    242,
+    244,
+    246,
+    0.2
+); // Leicht transparent, um einen Hauch von Farbe zu geben, ohne dominierend zu sein.
+$background-color-medium: rgba(
+    242,
+    244,
+    246,
+    0.5
+); // Halbtransparent, ideal für Überlagerungseffekte, die mehr Struktur benötigen.
+$background-color-less-transparent: rgba(
+    242,
+    244,
+    246,
+    0.8
+); // Weniger transparent, gut für Hintergründe von Modalfenstern oder aktiven Bereichen.
+$background-color-solid: rgba(
+    242,
+    244,
+    246,
+    1
+); // Vollständig undurchsichtig, geeignet für Hintergründe, die vollständige Deckung erfordern.
+
+// Schriftfamilien
+$font-family-default: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+$font-family-headline: "Edu QLD Beginner", cursive;
+
+// Schriftgrößen
+$font-size-xxs: 0.75rem; // 12px, ideal für sehr kleine Labels oder Fußnoten.
+$font-size-xs: 0.875rem; // 14px, gut für Hilfstexte oder kleinere Buttons.
+$font-size-sm: 1rem; // 16px, Standard für allgemeinen Textgebrauch.
+$font-size-md: 1.125rem; // 18px, bietet eine gute Balance und ist lesbar für Fließtext.
+$font-size-lg: 1.5rem; // 20px, häufig verwendet für kleine Überschriften oder wichtige UI-Komponenten.
+$font-size-xl: 1.8rem; // 24px, ideal für Hauptüberschriften oder wichtige Aufrufe zum Handeln.
+$font-size-xxl: 2.5rem; // 32px, für große Überschriften oder wichtige visuelle Elemente.
+
+// Schriftgewichte
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+
+$spacing-xxs: 2px; // Sehr kleiner Abstand, nützlich für feine visuelle Trennungen
+$spacing-xs: 4px; // Ideal für dichte UI-Komponenten oder als subtiler Innenabstand
+$spacing-sm: 16px; // Geeignet für kleine Paddings innerhalb von Elementen
+$spacing-md: 26px; // Standard für die meisten Abstände in der Benutzeroberfläche
+$spacing-lg: 32px; // Gut für größere Abschnitte zwischen Content-Blöcken
+$spacing-xl: 64px; // Ideal für Layouts, die deutliche Abschnitte erfordern
+$spacing-xxl: 128px; // Für sehr große Raumaufteilungen, oft in heroischen Abschnitten oder sehr großzügigen Layouts
+
+// Radien
+$radius-xxs: 2px; // Geeignet für subtile Rundungen an kleinen Komponenten wie Icons
+$radius-xs: 4px; // Ideal für kleinere Inputfelder und Buttons
+$radius-sm: 6px; // Standardradius für UI-Komponenten wie Buttons und Karten
+$radius-md: 12px; // Gut für modale Fenster und Dropdown-Menüs
+$radius-lg: 16px; // Geeignet für Container und große UI-Elemente, die weicher erscheinen sollen
+$radius-xl: 24px; // Für Elemente, die eine stark gerundete Ecke benötigen, z.B. runde Buttons
+$radius-xxl: 32px; // Extrem gerundet, gut für sehr markante Designelemente oder vollständig runde Formen
+
+// Margin
+$margin-xxs: 2px; // Sehr kleiner Abstand, geeignet für feine Justierungen innerhalb von Komponenten
+$margin-xs: 4px; // Ideal für kleine Paddings zwischen Icons oder kleinen Textelementen
+$margin-sm: 8px; // Häufig verwendeter Abstand für kleine Trennungen in UI-Elementen
+$margin-md: 16px; // Standard-Margin, verwendet für Abstände zwischen größeren Komponenten
+$margin-lg: 24px; // Gut für größere Abschnitte zwischen Gruppen von Komponenten oder Layouts
+$margin-xl: 32px; // Ideal für größere Layout-Trennungen, wie zwischen verschiedenen Hauptsektionen einer Seite
+$margin-xxl: 48px; // Für maximale Raumtrennung, oft in großzügigen Designs oder um besondere Aufmerksamkeit zu erzeugen
+
+// Weicher, leichter Schatten
+$box-shadow-soft-light: 0px 1px 3px rgba(0, 0, 0, 0.05);
+$box-shadow-soft-medium: 0px 2px 4px rgba(0, 0, 0, 0.06);
+$box-shadow-soft-strong: 0px 3px 5px rgba(0, 0, 0, 0.07);
+$box-shadow-soft-extra-strong: 0px 4px 6px rgba(0, 0, 0, 0.08);
+// Fokussierter, mittlerer Schatten
+$box-shadow-focused-light: 0px 3px 5px rgba(0, 0, 0, 0.12);
+$box-shadow-focused-medium: 0px 8px 15px rgba(0, 0, 0, 0.3);
+$box-shadow-focused-strong: 0px 5px 8px rgba(0, 0, 0, 0.18);
+$box-shadow-focused-extra-strong: 0px 6px 10px rgba(0, 0, 0, 0.2);
+// Tiefen Schatten
+$box-shadow-deep-light: 0px 6px 12px rgba(0, 0, 0, 0.2);
+$box-shadow-deep-medium: 0px 10px 20px rgba(0, 0, 0, 0.25);
+$box-shadow-deep-strong: 0px 15px 30px rgba(0, 0, 0, 0.3);
+$box-shadow-deep-extra-strong: 0px 20px 40px rgba(0, 0, 0, 0.35);
+// Schwebender Schatten
+$box-shadow-hover-light: 0px 8px 16px rgba(0, 0, 0, 0.18);
+$box-shadow-hover-medium: 0px 12px 24px rgba(0, 0, 0, 0.2);
+$box-shadow-hover-strong: 0px 16px 32px rgba(0, 0, 0, 0.22);
+$box-shadow-hover-extra-strong: 0px 20px 40px rgba(0, 0, 0, 0.24);
+// Innerer Schatten
+$box-shadow-inner-light: inset 0px 1px 2px rgba(0, 0, 0, 0.07);
+$box-shadow-inner-medium: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-inner-strong: inset 0px 3px 6px rgba(0, 0, 0, 0.13);
+$box-shadow-inner-extra-strong: inset 0px 4px 8px rgba(0, 0, 0, 0.16);
+
+// Hover-Skalierung
+$hover-scale-medium: 1.15; // Standard
+$hover-scale-small: 1.1; // Eine leicht reduzierte Skalierung für subtile Hover-Effekte.
+$hover-scale-large: 1.25; // Eine erhöhte Skalierung für auffällige Hover-Effekte.
+$hover-scale-extra-small: 1.05; // Eine sehr reduzierte Skalierung für sehr subtile Hover-Effekte.
+$hover-scale-extra-large: 1.5; // Eine stark erhöhte Skalierung für sehr auffällige Hover-Effekte.
+$hover-scale-moderate: 1.2; // Eine moderate Skalierung für ausgewogene Hover-Effekte.
+
+// Animationen
+$transition-fast: 0.2s;
+$transition-normal: 0.5s;
+$transition-slow: 1s;
+
+// Basis Glas-Effekte
+$glass-colors: (
+    "light": rgba(255, 255, 255, 0.6),
+    "extra-light": rgba(255, 255, 255, 0.8),
+    "subtle": rgba(255, 255, 255, 0.4),
+    "dark": rgba(0, 0, 0, 0.2),
+    "colorful": rgba(173, 216, 230, 0.5),
+);
+
+// Variationen der Unschärfeintensität
+$blur-intensity: (
+    "soft": 5px,
+    "medium": 15px,
+    "hard": 30px,
+);
+
+// Farbige Glas-Effekte
+$light-blue: rgba(173, 216, 230, 0.5); // Milchglas Blau
+$glass-color-pink: rgba(255, 182, 193, 0.5); // Rosafarbener Glas-Effekt
+$glass-color-green: rgba(144, 238, 144, 0.5); // Grüner Glas-Effekt
+$glass-color-blue: $light-blue; // Vordefiniertes milchiges Blau
+$glass-color-purple: rgba(221, 160, 221, 0.5); // Purpurner Glas-Effekt
+
+$header-height: 5vh;
+$vertical-margin: 1.4vw;
+$horizontal-margin: 1.4vw;
+
+$arrow-icon: 'data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>';
+
+// Breakpoints für verschiedene Bildschirmgrößen
+$breakpoint-xs: 480px; // Sehr kleine Geräte (z.B. alte Smartphones)
+$breakpoint-sm: 576px; // Kleine Geräte (z.B. Smartphones)
+$breakpoint-md: 768px; // Mittlere Geräte (z.B. Tablets)
+$breakpoint-lg: 992px; // Große Geräte (z.B. kleine Laptops)
+$breakpoint-xl: 1200px; // Sehr große Geräte (z.B. Desktops und größere Laptops)
+$breakpoint-xxl: 1400px; // Sehr breite Bildschirme (z.B. große Monitore)

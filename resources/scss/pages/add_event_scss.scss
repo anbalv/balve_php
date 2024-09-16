@@ -1,0 +1,197 @@
+// fabalve\static\scss\_add_event_scss.scss
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.xx-button-xx {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--button-active-color);
+  text-transform: uppercase;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 8px var(--button-shadow-color);
+  max-width: 300px;
+  margin: 2rem auto;
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 18px;
+
+  // Wrapping transition and hover rules with &
+  & {
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+  }
+
+  &:hover,
+  &:focus {
+    background: lighten($secondary-color, 10%);
+    color: var(--dark-color);
+    box-shadow: 0 6px 16px rgba($secondary-color, 0.25);
+    transform: translateY(-2px);
+    outline: none;
+    background: linear-gradient(135deg, lighten($secondary-color, 10%), $primary-color);
+    font-weight: bold;
+  }
+}
+
+.btn-view-all {
+  display: block;
+  width: 30%;
+  padding: 0.75rem;
+  background: var(--button-active-color);
+  text-transform: uppercase;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 8px var(--button-shadow-color);
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 40px;
+
+  // Wrapping transition and hover rules with &
+  & {
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s, color 0.3s;
+  }
+
+  &:hover,
+  &:focus {
+    background: lighten($secondary-color, 10%);
+    color: var(--dark-color);
+    box-shadow: 0 6px 16px rgba($secondary-color, 0.25);
+    transform: translateY(-2px);
+    outline: none;
+    background: linear-gradient(135deg, lighten($secondary-color, 10%), $primary-color);
+  }
+}
+
+// Mixin for multi-layered glass effect
+@mixin multi-layered-glass-effect($glass-colors, $blur-intensity) {
+  position: relative;
+  background: linear-gradient(145deg, rgba(map-get($glass-colors, "colorful"), 0.5));
+
+  $blur-value: if(type-of($blur-intensity) == number, $blur-intensity, map-get($blur-intensity, "medium"));
+
+  -webkit-backdrop-filter: blur($blur-value + px);
+  backdrop-filter: blur($blur-value + px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  // Wrapping pseudo-element with &
+  & {
+    &:after {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      z-index: -1;
+      background: inherit;
+      filter: blur(10px);
+    }
+  }
+}
+
+// Applying mixin to .event-wrapper
+.event-wrapper {
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  max-width: 55%;
+  margin: 2rem;
+  overflow: hidden;
+  width: 35%;
+
+  // Wrapping mixin call with &
+  & {
+    @include multi-layered-glass-effect($glass-colors, $blur-intensity);
+  }
+}
+
+.form-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid $accent-color;
+  padding: $spacing-lg;
+  border-radius: $radius-md;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+  }
+
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  &:hover {
+    transform: scale(1.05) rotateX(5deg);
+    box-shadow: 0 10px 20px $neon-pink;
+    animation: backgroundShift 20s linear infinite;
+  }
+}
+
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@mixin glass-effect($color) {
+  background: $color;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid lighten($color, 20%);
+}
+
+.top-right-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.event-type-label {
+  flex-basis: 60%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  color: var($dark-color);
+  font-weight: bold;
+  line-height: normal;
+}
+
+.form-field.event-type-select {
+  flex: 0 0 40%;
+  height: auto;
+  padding: 8px;
+  background-color: #ffffff;
+  border: 2px solid var($accent-color);
+  background-image: url($arrow-icon);
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 28px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-field::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-style: italic;
+  padding-left: 5px;
+}

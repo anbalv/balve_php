@@ -1,0 +1,9 @@
+// fabalve\static\scss\components\buttons.scss
+@import "../base/mixins"; // Adjust path as necessary
+
+.button {
+  @include button-style($primary-color);
+  &:hover {
+    @include neon-glow($accent-color);
+  }
+}

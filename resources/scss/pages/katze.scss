@@ -1,0 +1,535 @@
+@import "../base/variables";
+@import "../base/mixins"; // Import mixins
+@import "../base/typography";
+@import "../base/fonts"; // Import fonts
+
+.vertical-section-katze {
+  width: 100%;
+  height: 100%;
+}
+
+.cat-image {
+  position: absolute;
+  bottom: -14px;
+  right: -7px;
+  width: 276px;
+  height: auto;
+}
+
+.speech-bubble-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.speech-bubble {
+  position: relative;
+  top: -11%;
+  left: 20%;
+  transform: translate(-100%, -50%);
+  width: 309px;
+  height: 154px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to top right, #f8f9fa, #007bff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  z-index: 9;
+}
+
+.speech-bubble-arrow {
+  position: absolute;
+  bottom: -70px;
+  left: 34%;
+  width: 79px;
+  height: 452px;
+  border-left: 29px solid rgba(255, 255, 255, 0);
+  border-right: 49px solid rgba(255, 255, 255, 0);
+  border-top: 175px solid rgba(0, 123, 255, 0.631372549);
+  transform: translateX(76%) rotate(-62deg);
+  z-index: 8;
+}
+
+.vertical-section#third-section {
+  background-color: $white-color;
+  color: $dark-color;
+  border-radius: $radius-xs;
+  box-shadow: $box-shadow-focused-medium;
+  width: 80%;
+  height: calc(100% - 1 * 20px);
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert den Inhalt vertikal */
+  align-items: center; /* Zentriert den Inhalt horizontal */
+  transform: scaleY(0);
+  transform-origin: top;
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
+}
+
+.vertical-section#third-section.active {
+  transform: scaleY(1); /* Skalierung auf volle Höhe */
+  padding: 20px;
+  width: 80%;
+  height: calc(100% - 1 * 20px);
+  margin-bottom: 20px;
+}
+
+.text-container {
+  text-align: center;
+}
+
+.date-text,
+.points-text {
+  font-size: 1.425rem;
+  font-weight: 700;
+  font-family: "Edu QLD Beginner", cursive;
+}
+
+/* Interaktive Effekte hinzufügen */
+.speech-bubble:hover {
+  transform: translate(-100%, -50%) scale($hover-scale-small); /* Bleibt konsistent mit der normalen Transformation */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover für mehr Tiefe */
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Hochformat
+------------------------------------ */
+@media screen and (min-width: 601px) and (max-width: 810px) and (orientation: portrait) {
+  .vertical-section-katze {
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .cat-image {
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
+    width: 355px;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .speech-bubble-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Padding für Innenabstände hinzugefügt */
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: -11%;
+    left: 2%;
+    transform: translate(-50%, -50%);
+    width: 376px;
+    height: 182px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 4px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to top right, #f8f9fa, #007bff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    z-index: 9;
+  }
+
+  .speech-bubble-arrow {
+    position: absolute;
+    bottom: 154px;
+    left: 31%;
+    width: 60px;
+    height: 350px;
+    border-left: 46px solid rgba(255, 255, 255, 0);
+    border-right: 34px solid rgba(255, 255, 255, 0);
+    border-top: 247px solid rgba(0, 123, 255, 0.631372549);
+    transform: translateX(50%) rotate(-48deg);
+    z-index: 8;
+  }
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 90%; /* Breite angepasst für bessere Darstellung */
+    height: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1);
+    padding: 20px;
+    width: 90%;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+
+  .text-container {
+    text-align: center;
+  }
+
+  .date-text,
+  .points-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: "Edu QLD Beginner", cursive;
+  }
+
+  /* Interaktive Effekte hinzufügen */
+  .speech-bubble:hover {
+    transform: translate(-50%, -50%) scale(1.05); /* Leichte Skalierung beim Hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für iPad 8th Gen Querformat
+------------------------------------ */
+@media screen and (min-width: 1025px) and (max-width: 1080px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section-katze {
+    width: 100%;
+    height: 100%;
+    display: flex; /* Aktiviert Flexbox */
+    flex-direction: column; /* Richtet den Inhalt vertikal aus */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    position: relative; /* Ermöglicht die absolute Positionierung von Kind-Elementen */
+  }
+
+  .cat-image {
+    position: absolute;
+    bottom: 173px;
+    right: -79px;
+    width: 316px;
+    height: auto;
+    z-index: 10;
+  }
+
+  .speech-bubble-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Padding für Innenabstände hinzugefügt */
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: -16%;
+    left: 17%;
+    transform: translate(-50%, -50%);
+    width: 343px;
+    height: 158px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 4px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to top right, #f8f9fa, #007bff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    z-index: 9;
+  }
+
+  .speech-bubble-arrow {
+    position: absolute;
+    bottom: 149px;
+    left: 46%;
+    width: 80px;
+    height: 503px;
+    border-left: 29px solid rgba(255, 255, 255, 0);
+    border-right: 49px solid rgba(255, 255, 255, 0);
+    border-top: 175px solid rgba(0, 123, 255, 0.631372549);
+    transform: translateX(50%) rotate(-45deg);
+    z-index: 8;
+  }
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 80%;
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1); /* Skalierung auf volle Höhe */
+    padding: 20px;
+    width: 80%;
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+  }
+
+  .text-container {
+    text-align: center;
+  }
+
+  .date-text,
+  .points-text {
+    font-size: 1.425rem;
+    font-weight: 700;
+    font-family: "Edu QLD Beginner", cursive;
+  }
+
+  /* Interaktive Effekte hinzufügen */
+  .speech-bubble:hover {
+    transform: translate(-50%, -50%) scale(1.05); /* Bleibt konsistent mit der normalen Transformation */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover für mehr Tiefe */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Hochformat
+------------------------------------ */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section-katze {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .cat-image {
+    position: absolute;
+    bottom: -116px;
+    right: -17px;
+    width: 306px;
+    height: auto;
+  }
+
+  .speech-bubble-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Reduzierte Polsterung */
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: -1%;
+    left: -2%;
+    transform: translate(-50%, -50%);
+    width: 279px;
+    height: 141px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 4px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to top right, #f8f9fa, #007bff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    z-index: 9;
+  }
+
+  .speech-bubble-arrow {
+    position: absolute;
+    bottom: 56px;
+    left: 22%;
+    width: 52px;
+    height: 200px;
+    border-left: 20px solid rgba(255, 255, 255, 0);
+    border-right: 30px solid rgba(255, 255, 255, 0);
+    border-top: 152px solid rgba(0, 123, 255, 0.631372549);
+    transform: translateX(50%) rotate(-50deg);
+    z-index: 8;
+  }
+
+  .text-container {
+    text-align: center;
+  }
+
+  .date-text,
+  .points-text {
+    font-size: 1.2rem; /* Schriftgröße angepasst für kleinere Bildschirme */
+    font-weight: 700;
+    font-family: "Edu QLD Beginner", cursive;
+  }
+
+  /* Interaktive Effekte hinzufügen */
+  .speech-bubble:hover {
+    transform: translate(-50%, -50%) scale(1.05); /* Leichte Skalierung beim Hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover */
+  }
+}
+
+/* ------------------------------------
+   Anpassungen für Fire 7 (9. Generation) Querformat
+------------------------------------ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  @import "../base/variables";
+  @import "../base/mixins"; // Import mixins
+  @import "../base/typography";
+  @import "../base/fonts"; // Import fonts
+
+  .vertical-section-katze {
+    width: 100%;
+    height: 100%;
+    display: flex; /* Aktiviert Flexbox */
+    flex-direction: column; /* Richtet den Inhalt vertikal aus */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    position: relative; /* Ermöglicht die absolute Positionierung von Kind-Elementen */
+  }
+
+  .cat-image {
+    position: absolute;
+    bottom: 252px;
+    right: -58px;
+    width: 294px;
+    height: auto;
+    z-index: 10;
+  }
+
+  .speech-bubble-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Padding für Innenabstände hinzugefügt */
+  }
+
+  .speech-bubble {
+    position: relative;
+    top: -22%;
+    left: 38%;
+    transform: translate(-100%, -50%);
+    width: 283px;
+    height: 129px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 4px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to top right, #f8f9fa, #007bff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    z-index: 9;
+  }
+
+  .speech-bubble-arrow {
+    position: absolute;
+    bottom: 473px;
+    left: 27%;
+    width: 11px;
+    height: 34px;
+    border-left: 29px solid rgba(255, 255, 255, 0);
+    border-right: 12px solid rgba(255, 255, 255, 0);
+    border-top: 142px solid rgba(0, 123, 255, 0.631372549);
+    transform: translateX(50%) rotate(-45deg);
+    z-index: 8;
+  }
+
+  .vertical-section#third-section {
+    background-color: $white-color;
+    color: $dark-color;
+    border-radius: $radius-xs;
+    box-shadow: $box-shadow-focused-medium;
+    width: 80%;
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert den Inhalt vertikal */
+    align-items: center; /* Zentriert den Inhalt horizontal */
+    transform: scaleY(0);
+    transform-origin: top;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .vertical-section#third-section.active {
+    transform: scaleY(1); /* Skalierung auf volle Höhe */
+    padding: 20px;
+    width: 80%;
+    height: auto; /* Höhe automatisch anpassen */
+    margin-bottom: 20px;
+  }
+
+  .text-container {
+    text-align: center;
+  }
+
+  .date-text,
+  .points-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: "Edu QLD Beginner", cursive;
+  }
+
+  /* Interaktive Effekte hinzufügen */
+  .speech-bubble:hover {
+    transform: translate(-50%, -50%) scale(1.05); /* Bleibt konsistent mit der normalen Transformation */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Verstärkter Schatten beim Hover für mehr Tiefe */
+  }
+}
